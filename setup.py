@@ -11,12 +11,16 @@ config = {
     'author_email': 'ross@servercode.co.uk',
     'version': '0.1',
     'install_requires': [
-        'nose'
+        'nose',
+        'pyyaml==3.11'
     ],
     'packages': ['api_etl'],
     'scripts': [],
     'name': 'api_etl',
     'entry_points': {
+        'console_scripts': [
+            'etl=api_etl.commands.etl:main',
+        ],
         'services': [
             'health = api_etl.services.health:entrypoints',
         ]
