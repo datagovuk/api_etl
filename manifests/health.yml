@@ -10,4 +10,15 @@ services:
         pk_name: organisation_id
         index: partial_postcode, organisation_name
         unique_fields: organisation_name, postcode
+    # Clinics is currently broken, I don't think the TSV encoding is accurate ...
+    - name: clinics
+      documentation_url: ""
+      schema_url: "https://raw.githubusercontent.com/datagovuk/health-schemas/master/Clinics.json"
+      separator: tab
+      resource: 7dc4cad0-477c-4c38-a8cb-45557b294cd4
+      table_settings:
+        pk_name: organisation_id
+        index: partial_postcode, organisation_name
+        unique_fields: organisation_name, postcode
+
 

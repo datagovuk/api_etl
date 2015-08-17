@@ -11,4 +11,12 @@ def entrypoints():
         'extractor': e.CKANExtractor,
         'transformer': h.HospitalTransformer,
         'loader': l.PostgresLoader,
+    },
+    {
+        'name': 'clinics',
+        'extractor': e.CKANExtractor,
+        'transformer': h.HospitalTransformer, # Use same transformer as hospitals
+        'loader': l.PostgresLoader,
     }]
+
+

@@ -12,6 +12,16 @@ APIs are split into themes, and services, where each theme can have multiple ser
 
 ## Installation
 
+Requirements:
+
+* Python 2.7+
+* Postgres > v9.0
+* build-essential (for Ubuntu)
+* Postgres-dev (for psycopg2)
+* virtualenv (python-virtualenv on Ubuntu)
+
+Installing ...
+
 1. Create a virtualenv, and activate it 
 2. ```git clone git@github.com:datagovuk/api_etl.git```
 3. ```python setup.py develop```

@@ -1,3 +1,4 @@
+# coding=utf-8
 from api_etl.util import slugify_name
 
 import unicodecsv as csv
@@ -6,7 +7,7 @@ import chardet
 SEPARATORS = {
     'tab'  : '\t',
     'comma': ',',
-    ''     : ','
+    ''     : ',',
 }
 
 class Transformer(object):
@@ -33,8 +34,9 @@ class Transformer(object):
 
                 for row in reader:
                     new_row = self.transform_row(row)
-                    writer.writerow(new_row)
-                    row_count += 1
+                    if new_row:
+                        writer.writerow(new_row)
+                        row_count += 1
         return row_count
 
     def new_header_rows(self, headers):

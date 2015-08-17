@@ -14,12 +14,21 @@ class HospitalTransformer(lib.Transformer):
 
         # Copy the existing data ...
         for k, v in row_in.iteritems():
-            row[self.header_map[k]] = v
+            if k is None:
+                print "*" * 30
+                print "BAD DATA in source: {}".format(row_in)
+                print "*" * 30
+                return None
+            else:
+                row[self.header_map[k]] = v
 
         # TODO: Trim lat/lng down to more realistic resolution
 
         # Take a partial postcode so we can search for it ...
-        row['partial_postcode'] = row['postcode'].split(' ')[0].strip()
+        if row['postcode']:
+            row['partial_postcode'] = row['postcode'].split(' ')[0].strip()
+        else:
+            row['postcode'] = ''
 
         return row
 

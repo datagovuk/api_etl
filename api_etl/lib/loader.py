@@ -72,12 +72,13 @@ class PostgresLoader(Loader):
         inserted = 0
         for row in reader:
             if not self._row_exists(row['organisation_id'], 'organisation_id', service_manifest.name):
-                print "Would insert", row['organisation_id']
                 self._insert_row(service_manifest.name, row)
                 inserted += 1
 
         if inserted:
             self.conn.commit()
+
+        print "  Inserted {} rows into database".format(inserted)
 
     def _insert_row(self, tablename, row):
         cols = []
@@ -119,6 +120,7 @@ class PostgresLoader(Loader):
 
         pkname = self._get_pk_name(service_manifest)
 
+        table_settings = service_manifest.table_settings
         indices = [i.strip() for i in table_settings['index'].split(',')]
         print "  Indices are {}".format(indices)
 
@@ -138,7 +140,7 @@ class PostgresLoader(Loader):
 
         idx = ";\n".join(idx)
 
-        return (q + idx, pk,)
+        return q + idx
 
 
 
