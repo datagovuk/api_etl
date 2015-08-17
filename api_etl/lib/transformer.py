@@ -18,6 +18,7 @@ class Transformer(object):
         encoding = encoding_check.get('encoding', 'windows-1252')
         print "  .... {}".format(encoding)
 
+        row_count = 0
         with open(input_filename) as input_file:
             reader = csv.DictReader(input_file, encoding=encoding, delimiter=SEPARATORS[service_manifest.separator])
 
@@ -25,6 +26,7 @@ class Transformer(object):
             # Ask the subclass to add any new headers it will add
             headers = self.new_header_rows(headers)
 
+            print "  Transforming data ..."
             with open(output_filename, 'wb') as output_file:
                 writer = csv.DictWriter(output_file, fieldnames=headers)
                 writer.writeheader()
@@ -32,6 +34,8 @@ class Transformer(object):
                 for row in reader:
                     new_row = self.transform_row(row)
                     writer.writerow(new_row)
+                    row_count += 1
+        return row_count
 
     def new_header_rows(self, headers):
         """ When implemented in a subclass, returns the potentially modified header rows """

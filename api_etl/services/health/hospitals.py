@@ -32,6 +32,3 @@ class HospitalTransformer(lib.Transformer):
 
         return self.header_map.values()
 
-
-class HospitalLoader(lib.Loader):
-    pass

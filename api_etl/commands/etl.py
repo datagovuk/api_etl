@@ -60,13 +60,13 @@ class ServiceCommand(cmd.Cmd):
         entry = zip(services, service_entries)
         for e in entry:
             ep, sm = e
-            self.run_etl(ep, sm)
+            self.run_etl(parts[0], ep, sm)
 
     def print_separator(self, c='*'):
         print c * 60
 
 
-    def run_etl(self, entry_points, service_manifest):
+    def run_etl(self, theme, entry_points, service_manifest):
         """ Runs ETL by finding the manifest for each service based on the name"""
         self.print_separator('=')
         print "Running ETL with {} service".format(service_manifest.name)
@@ -78,15 +78,28 @@ class ServiceCommand(cmd.Cmd):
         path = extractor.extract(self.config.manifest('working_folder'), service_manifest)
         print "  Downloaded content to {}".format(path)
 
+        """
         transformer = entry_points['transformer']()
         print "\nTransforming data"
         self.print_separator()
-        transformer.transform(service_manifest, path, path + ".out")
-
+        count = transformer.transform(service_manifest, path, path + ".out")
+        print "  Wrote {} rows to {}".format(count, path + ".out")
+        """
 
         loader = entry_points['loader']()
         print "\nLoading data"
         self.print_separator()
+
+        loader.init_connection(theme)
+        if not loader.table_exists(service_manifest):
+            loader.create_table(service_manifest, path + ".out")
+        else:
+            print "  Table already exists in DB"
+        loader.load_data(service_manifest, path + ".out")
+        loader.close_connection()
+
+    def load_data(self, service_manifest, source_file):
+        pass
 
 
 def main():

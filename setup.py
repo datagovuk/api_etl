@@ -16,7 +16,8 @@ config = {
         'ckanapi==3.5',
         'requests==2.7',
         'unicodecsv==0.13.0',
-        'chardet==2.3.0'
+        'chardet==2.3.0',
+        'psycopg2==2.6.1'
     ],
     'packages': ['api_etl'],
     'scripts': [],

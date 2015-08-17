@@ -1,6 +1,7 @@
 
 import hospitals as h
 import api_etl.lib.extractor as e
+import api_etl.lib.loader as l
 
 def entrypoints():
     """ Returns a list of ETL objects for various entries underneath
@@ -9,5 +10,5 @@ def entrypoints():
         'name': 'hospitals',
         'extractor': e.CKANExtractor,
         'transformer': h.HospitalTransformer,
-        'loader': h.HospitalLoader,
+        'loader': l.PostgresLoader,
     }]
