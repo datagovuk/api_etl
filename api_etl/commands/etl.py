@@ -78,13 +78,12 @@ class ServiceCommand(cmd.Cmd):
         path = extractor.extract(self.config.manifest('working_folder'), service_manifest)
         print "  Downloaded content to {}".format(path)
 
-        """
         transformer = entry_points['transformer']()
         print "\nTransforming data"
         self.print_separator()
         count = transformer.transform(service_manifest, path, path + ".out")
         print "  Wrote {} rows to {}".format(count, path + ".out")
-        """
+
 
         loader = entry_points['loader']()
         print "\nLoading data"
@@ -95,7 +94,7 @@ class ServiceCommand(cmd.Cmd):
             loader.create_table(service_manifest, path + ".out")
         else:
             print "  Table already exists in DB"
-        loader.load_data(service_manifest, path + ".out")
+        loader.load_data(service_manifest, path + ".out", transformer.encoding)
         loader.close_connection()
 
     def load_data(self, service_manifest, source_file):

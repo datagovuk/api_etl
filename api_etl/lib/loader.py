@@ -1,4 +1,5 @@
 import psycopg2
+import unicodecsv as csv
 
 class Loader(object):
     """
@@ -57,7 +58,7 @@ class PostgresLoader(Loader):
 
     def create_table(self, service_manifest, input_file):
         print "  Creating table {} in DB {}".format(service_manifest.name, self.database_name)
-        import csv; reader = csv.reader(open(input_file))
+        reader = csv.reader(open(input_file))
         q = self._create_sql(service_manifest, reader.next())
 
         cur = self.conn.cursor()
@@ -65,20 +66,58 @@ class PostgresLoader(Loader):
         self.conn.commit()
         cur.close()
 
-
-    def load_data(self, service_manifest, source_file):
+    def load_data(self, service_manifest, source_file, encoding):
         print "  Loading data into table {}".format(service_manifest.name)
+        reader = csv.DictReader(open(source_file), encoding=encoding)
+        inserted = 0
+        for row in reader:
+            if not self._row_exists(row['organisation_id'], 'organisation_id', service_manifest.name):
+                print "Would insert", row['organisation_id']
+                self._insert_row(service_manifest.name, row)
+                inserted += 1
+
+        if inserted:
+            self.conn.commit()
+
+    def _insert_row(self, tablename, row):
+        cols = []
+        vals = []
+
+        cols = [k for k in row.keys()]
+        for c in cols:
+            v = row[c].replace("'", "''")
+            vals.append(u"'{}'".format(v).strip())
+
+        cols = ",".join(cols)
+        vals = ','.join(vals)
+        q = u"""
+            INSERT INTO {tbl}({cols})
+            VALUES({vals});
+        """.format(tbl=tablename, cols=cols, vals=vals).strip()
+
+        cur = self.conn.cursor()
+        cur.execute(q)
+        cur.close()
 
 
+    def _row_exists(self, id, column, tablename):
+        cur = self.conn.cursor()
+        cur.execute("SELECT count(*) FROM {tbl} WHERE {col}='{val}'".format(tbl=tablename, col=column, val=id))
+        result = cur.fetchone()
+        cur.close()
+
+        return result[0]
+
+    def _get_pk_name(self, service_manifest):
+        table_settings = service_manifest.table_settings
+        return table_settings['pk_name']
 
     def _create_sql(self, service_manifest, headers):
         # TODO: We should here check the schema for required fields so can can NOT NULL
         # the relevant columns - making sure to slugify them first ...
         columns = []
 
-        table_settings = service_manifest.table_settings
-
-        pkname =table_settings['pk_name']
+        pkname = self._get_pk_name(service_manifest)
 
         indices = [i.strip() for i in table_settings['index'].split(',')]
         print "  Indices are {}".format(indices)
@@ -99,7 +138,7 @@ class PostgresLoader(Loader):
 
         idx = ";\n".join(idx)
 
-        return q + idx
+        return (q + idx, pk,)
 
 
 

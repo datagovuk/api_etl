@@ -12,7 +12,11 @@ APIs are split into themes, and services, where each theme can have multiple ser
 
 ## Installation
 
-
+1. Create a virtualenv, and activate it 
+2. ```git clone git@github.com:datagovuk/api_etl.git```
+3. ```python setup.py develop```
+4. Make a directory somewhere to store manifests
+5. Make a directory somewhere to store downloads
 
 
 ## Configuration
@@ -78,7 +82,7 @@ Ideally we want the files imported to follow a schema.
 
 ## TODO: 
 
-* ~Simple Configuration:~~
+* ~~Simple Configuration:~~
 	* ~~Location of manifest files~~
 	* ~~DB user to use etc~~
 * Workout how we might do lat-lng lookup ...

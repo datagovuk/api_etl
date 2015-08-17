@@ -15,12 +15,12 @@ class Transformer(object):
 
         print "  Determining encoding ..."
         encoding_check = chardet.detect(open(input_filename).read())
-        encoding = encoding_check.get('encoding', 'windows-1252')
-        print "  .... {}".format(encoding)
+        self.encoding = encoding_check.get('encoding', 'windows-1252')
+        print "  .... {}".format(self.encoding)
 
         row_count = 0
         with open(input_filename) as input_file:
-            reader = csv.DictReader(input_file, encoding=encoding, delimiter=SEPARATORS[service_manifest.separator])
+            reader = csv.DictReader(input_file, encoding=self.encoding, delimiter=SEPARATORS[service_manifest.separator])
 
             headers = [n for n in reader.fieldnames]
             # Ask the subclass to add any new headers it will add
