@@ -78,7 +78,7 @@ Ideally we want the files imported to follow a schema.
 
 ## TODO: 
 
-* Simple Configuration:
-	* Location of manifest files 
-	* DB user to use etc
+* ~Simple Configuration:~~
+	* ~~Location of manifest files~~
+	* ~~DB user to use etc~~
 * Workout how we might do lat-lng lookup ...
