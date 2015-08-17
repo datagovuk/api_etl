@@ -17,8 +17,14 @@ class DbCommand(cmd.Cmd):
 
     def do_init(self, args):
         """ Create the database for the '''args''' theme """
+        from api_etl import Config
+
+        c = Config()
+        owner = c.database('owner')
+        role = c.database('reader_username')
+
         cmds = [
-            'createdb {db} -O {owner} -E utf-8'.format(db=args, owner="ckan"),
+            'createdb {db} -O {owner} -E utf-8',
             'psql {db} -c "GRANT CONNECT ON DATABASE {db} TO {role}"',
             'psql {db} -c "GRANT USAGE ON SCHEMA public TO {role}"',
             'psql {db} -c "GRANT SELECT ON ALL TABLES IN SCHEMA public TO {role}"',
@@ -27,12 +33,16 @@ class DbCommand(cmd.Cmd):
             'psql {db} -c "ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT ON SEQUENCES TO {role}"',
             'psql {db} -c "REVOKE CREATE ON SCHEMA public FROM public"'
         ]
-        print ';\n'.join(cmds).format(db=args,ro="ckan_reader", role='bob') + ";"
+        print ';\n'.join(cmds).format(db=args, role=role, owner=owner) + ";"
 
 
 class ServiceCommand(cmd.Cmd):
 
     def do_run(self, args):
+        from api_etl import Config
+
+        self.config = Config()
+
         parts = args.split('.')
         services = []
         service_entries = []
@@ -65,11 +75,13 @@ class ServiceCommand(cmd.Cmd):
         extractor = entry_points['extractor']()
         print "\nExtracting data"
         self.print_separator()
-
+        path = extractor.extract(self.config.manifest('working_folder'), service_manifest)
+        print "  Downloaded content to {}".format(path)
 
         transformer = entry_points['transformer']()
         print "\nTransforming data"
         self.print_separator()
+        transformer.transform(service_manifest, path, path + ".out")
 
 
         loader = entry_points['loader']()

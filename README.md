@@ -59,7 +59,21 @@ To run the hospitals service within the health theme, the command is:
 etl service run health.hospitals 
 ```
 
+## Development
 
+To stop downloads of content being performed every time you test something, you can set 
+
+```
+export DEV=1
+```
+
+which will only download files if the target file does not exist.
+
+## Notes
+
+Column names are lower-cased and all non-chars are removed during transformation. 
+Duplicate column names are not supported.
+Ideally we want the files imported to follow a schema.
 
 
 ## TODO: 
@@ -67,3 +81,4 @@ etl service run health.hospitals
 * Simple Configuration:
 	* Location of manifest files 
 	* DB user to use etc
+* Workout how we might do lat-lng lookup ...

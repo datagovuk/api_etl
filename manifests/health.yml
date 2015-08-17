@@ -2,4 +2,12 @@ title: Health
 documentation_url: ""
 services:
     - name: hospitals
-      url: /
+      documentation_url: ""
+      schema_url: "https://raw.githubusercontent.com/datagovuk/health-schemas/master/Hospital.json"
+      dataset: hospitals_
+      separator: tab
+      resource: 2e72ee42-c652-4caf-809c-3613985e5d1d
+      table_settings:
+        index: partial_postcode, organisation_name
+        pk_name: __id
+

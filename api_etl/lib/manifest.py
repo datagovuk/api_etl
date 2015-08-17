@@ -9,8 +9,8 @@ class ManifestService(object):
 
     def __init__(self, data):
         self.data = data
-        self.name = self.data['name']
-
+        for k, v in self.data.iteritems():
+            setattr(self, k, v)
 
 
 class Manifest(object):

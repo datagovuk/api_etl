@@ -12,7 +12,11 @@ config = {
     'version': '0.1',
     'install_requires': [
         'nose',
-        'pyyaml==3.11'
+        'pyyaml==3.11',
+        'ckanapi==3.5',
+        'requests==2.7',
+        'unicodecsv==0.13.0',
+        'chardet==2.3.0'
     ],
     'packages': ['api_etl'],
     'scripts': [],
