@@ -11,7 +11,7 @@ class DbCommand(cmd.Cmd):
         """ Creates the necessary roles, a super user and a reader account """
         accs = [
             "createuser -s ckan",
-            "createuser -s -D -R -P -l reader",
+            "createuser -S -D -R -P -l reader",
         ]
         print ';\n'.join(accs) + ";"
 
