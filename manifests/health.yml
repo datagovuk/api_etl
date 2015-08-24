@@ -13,13 +13,13 @@ services:
         pk_name: organisation_id
         index: partial_postcode, organisation_name
         unique_fields: organisation_name, postcode
-      searchable:
+      searchables:
         - name: partial_postcode
           description: Find hospitals with a partial postcode  (e.g. CH64, or L1)
-          query: select * from hospitals where LOWER(partial_postcode) = LOWER(:1)
+          query: select * from hospitals where LOWER(partial_postcode) = LOWER($1)
         - name: organisation_name
           description: Find hospitals by name
-          query: select * from hospitals where LOWER(organisation_name) = LOWER(:1)
+          query: select * from hospitals where LOWER(organisation_name) ILIKE '%' || LOWER($1) || '%'
     - name: clinics
       documentation_url: ""
       description: "Location of NHS Clinics"
@@ -30,12 +30,12 @@ services:
         pk_name: organisation_id
         index: partial_postcode, organisation_name
         unique_fields: organisation_name, postcode
-      searchable:
+      searchables:
         - name: partial_postcode
           description: Find clinics with a partial postcode (e.g. CH64, or L1)
-          query: select * from clinics where LOWER(partial_postcode) = LOWER(:1)
+          query: select * from clinics where LOWER(partial_postcode) = LOWER($1)
         - name: organisation_name
           description: Find clinics by name
-          query: select * from clinics where LOWER(organisation_name) = LOWER(:1)
+          query: select * from clinics where LOWER(organisation_name) = LOWER($1)
 
 
