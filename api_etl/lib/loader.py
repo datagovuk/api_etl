@@ -135,12 +135,14 @@ class PostgresLoader(Loader):
         """.strip().format(service_manifest.name, ",\n".join(columns))
         idx = []
         for i in indices:
-            s = "CREATE INDEX ON {} ((lower({})))".format(service_manifest.name, i)
+            s = "CREATE INDEX ON {} ((lower({})));".format(service_manifest.name, i)
             idx.append(s)
 
         idx = ";\n".join(idx)
 
-        return q + idx
+        grant_q = "GRANT SELECT ON ALL TABLES IN SCHEMA public TO {};".format(self.config.database('reader_username'))
+
+        return q + idx + grant_q
 
 
 
