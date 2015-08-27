@@ -1,6 +1,5 @@
 title: Health
-description: |
-  A collection of APIs that are related to health sourced from HSCIC and NHS England.
+description: A collection of APIs that are related to health sourced from HSCIC and NHS England.
 documentation_url: ""
 services:
     - name: hospitals

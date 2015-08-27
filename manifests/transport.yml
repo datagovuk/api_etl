@@ -1,0 +1,18 @@
+title: Transport
+description: A collection of APIs that are related to UK Transport
+documentation_url: ""
+services:
+    - name: planned_road_works
+      description: "Information on planned roadworks carried out on the Highways Agency network"
+      documentation_url: ""
+      schema_url: ""
+      separator: comma
+      dataset: highways_agency_planned_roadworks
+      table_settings:
+        pk_name: reference_number
+        index: road
+        unique_fields: reference_number
+      searchables:
+        - name: road
+          description: Find planned and historical roadworks by road (e.g. M1)
+          query: select * from  planned_road_works where LOWER(road) = LOWER($1)

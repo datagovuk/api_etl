@@ -67,11 +67,13 @@ class PostgresLoader(Loader):
         cur.close()
 
     def load_data(self, service_manifest, source_file, encoding):
+        pk = service_manifest.table_settings["pk_name"]
+
         print "  Loading data into table {}".format(service_manifest.name)
         reader = csv.DictReader(open(source_file), encoding=encoding)
         inserted = 0
         for row in reader:
-            if not self._row_exists(row['organisation_id'], 'organisation_id', service_manifest.name):
+            if not self._row_exists(row[pk], pk, service_manifest.name):
                 self._insert_row(service_manifest.name, row)
                 inserted += 1
 

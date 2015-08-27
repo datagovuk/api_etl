@@ -17,7 +17,8 @@ config = {
         'requests==2.7',
         'unicodecsv==0.13.0',
         'chardet==2.3.0',
-        'psycopg2==2.6.1'
+        'psycopg2==2.6.1',
+        'lxml==3.4.4'
     ],
     'packages': ['api_etl'],
     'scripts': [],
@@ -28,6 +29,7 @@ config = {
         ],
         'services': [
             'health = api_etl.services.health:entrypoints',
+            'transport = api_etl.services.transport:entrypoints',
         ]
     }
 }

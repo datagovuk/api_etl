@@ -84,7 +84,6 @@ class ServiceCommand(cmd.Cmd):
         count = transformer.transform(service_manifest, path, path + ".out")
         print "  Wrote {} rows to {}".format(count, path + ".out")
 
-
         loader = entry_points['loader']()
         print "\nLoading data"
         self.print_separator()
@@ -96,6 +95,7 @@ class ServiceCommand(cmd.Cmd):
             print "  Table already exists in DB"
         loader.load_data(service_manifest, path + ".out", transformer.encoding)
         loader.close_connection()
+
 
     def load_data(self, service_manifest, source_file):
         pass

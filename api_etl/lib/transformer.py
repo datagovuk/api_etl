@@ -46,5 +46,5 @@ class Transformer(object):
     def transform_row(self, row_in):
         """ To be implemented by subclass. It is expected that given
             a row (dict), it will return a new row (dict)"""
-        pass
+        return row_in
 
