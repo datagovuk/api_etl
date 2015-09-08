@@ -36,5 +36,24 @@ services:
         - name: organisation_name
           description: Find clinics by name
           query: select * from clinics where LOWER(organisation_name) = LOWER($1)
+    - name: gp_surgeries
+      documentation_url: ""
+      description: "GP Surgeries"
+      schema_url: https://raw.githubusercontent.com/datagovuk/health-schemas/master/GP.json
+      separator: tab
+      resource: 53328959-a0df-40b7-becb-7350d5a9754d
+      table_settings:
+        pk_name: organisation_id
+        index: partial_postcode, organisation_name
+        unique_fields: organisation_name, postcode
+      searchables:
+        - name: partial_postcode
+          description: Find surgeries with a partial postcode (e.g. CH64, or L1)
+          query: select * from gp_surgeries where LOWER(partial_postcode) = LOWER($1)
+        - name: organisation_name
+          description: Find surgeries by name
+          query: select * from gp_surgeries where LOWER(organisation_name) = LOWER($1)
+
+
 
 
