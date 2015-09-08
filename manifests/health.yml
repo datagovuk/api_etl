@@ -53,6 +53,27 @@ services:
         - name: organisation_name
           description: Find surgeries by name
           query: select * from gp_surgeries where LOWER(organisation_name) = LOWER($1)
+    - name: social_care_locations
+      documentation_url: ""
+      description: "Social Care service locations"
+      schema_url: http://data.gov.uk/data/resource/nhschoices/SCL.csv
+      separator: tab
+      resource: fc0e3df5-e352-4d12-b585-4e64c0852576
+      table_settings:
+        pk_name: organisation_id
+        index: partial_postcode, organisation_name
+        unique_fields: organisation_name, postcode
+      searchables:
+        - name: partial_postcode
+          description: Find locations with a partial postcode (e.g. CH64, or L1)
+          query: select * from social_care_locations where LOWER(partial_postcode) = LOWER($1)
+        - name: organisation_name
+          description: Find locations by name
+          query: select * from social_care_locations where LOWER(organisation_name) = LOWER($1)
+
+
+
+
 
 
 
