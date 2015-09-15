@@ -16,9 +16,13 @@ services:
         - name: partial_postcode
           description: Find hospitals with a partial postcode  (e.g. CH64, or L1)
           query: select * from hospitals where LOWER(partial_postcode) = LOWER($1)
+          fields:
+            - partial_postcode
         - name: organisation_name
           description: Find hospitals by name
           query: select * from hospitals where LOWER(organisation_name) ILIKE '%' || LOWER($1) || '%'
+          fields:
+            - organisation_name
     - name: clinics
       documentation_url: ""
       description: "Location of NHS Clinics"
@@ -33,9 +37,13 @@ services:
         - name: partial_postcode
           description: Find clinics with a partial postcode (e.g. CH64, or L1)
           query: select * from clinics where LOWER(partial_postcode) = LOWER($1)
+          fields:
+            - partial_postcode
         - name: organisation_name
           description: Find clinics by name
           query: select * from clinics where LOWER(organisation_name) = LOWER($1)
+          fields:
+            - organisation_name
     - name: gp_surgeries
       documentation_url: ""
       description: "GP Surgeries"
@@ -50,9 +58,13 @@ services:
         - name: partial_postcode
           description: Find surgeries with a partial postcode (e.g. CH64, or L1)
           query: select * from gp_surgeries where LOWER(partial_postcode) = LOWER($1)
+          fields:
+            - partial
         - name: organisation_name
           description: Find surgeries by name
           query: select * from gp_surgeries where LOWER(organisation_name) = LOWER($1)
+          fields:
+            - organisation_name
     - name: social_care_locations
       documentation_url: ""
       description: "Social Care service locations"
@@ -67,9 +79,13 @@ services:
         - name: partial_postcode
           description: Find locations with a partial postcode (e.g. CH64, or L1)
           query: select * from social_care_locations where LOWER(partial_postcode) = LOWER($1)
+          fields:
+            - partial_postcode
         - name: organisation_name
           description: Find locations by name
           query: select * from social_care_locations where LOWER(organisation_name) = LOWER($1)
+          fields:
+            - organisation_name
 
 
 

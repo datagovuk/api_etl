@@ -16,3 +16,5 @@ services:
         - name: road
           description: Find planned and historical roadworks by road (e.g. M1)
           query: select * from  planned_road_works where LOWER(road) = LOWER($1)
+          fields:
+            - road
