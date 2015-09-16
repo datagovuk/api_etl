@@ -1,0 +1,21 @@
+title: Environment
+description: A collection of APIs that are related to UK Environment
+documentation_url: ""
+services:
+    - name: oatmeal_millers
+      description: "Presents data on UK Cereals Usage by Oatmeal Miller."
+      documentation_url: ""
+      schema_url: ""
+      separator: tab
+      resource: a5c5cd18-2536-4c59-98ab-19c9dc3a96b7
+      table_settings:
+        pk_name: [year, quarter]
+      searchables:
+        - name: all_year
+          description: Show cereal usage by year
+          query: select * from oatmeal_millers
+        - name: year
+          description: Show cereal usage by year
+          query: select * from oatmeal_millers where year = $1
+          fields:
+            - year
