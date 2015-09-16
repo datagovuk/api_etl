@@ -11,8 +11,11 @@ services:
       table_settings:
         pk_name: [year, quarter]
       searchables:
-        - name: road
-          description: Find planned and historical roadworks by road (e.g. M1)
-          query: select * from  planned_road_works where LOWER(road) = LOWER($1)
+        - name: all_year
+          description: Show cereal usage by year
+          query: select * from oatmeal_millers
+        - name: year
+          description: Show cereal usage by year
+          query: select * from oatmeal_millers where year = $1
           fields:
-            - road
+            - year
