@@ -11,9 +11,10 @@ services:
       table_settings:
         pk_name: [year, quarter]
       searchables:
-        - name: all_year
-          description: Show cereal usage by year
+        - name: all_years
+          description: Show all cereal usage
           query: select * from oatmeal_millers
+          fields:
         - name: year
           description: Show cereal usage by year
           query: select * from oatmeal_millers where year = $1
