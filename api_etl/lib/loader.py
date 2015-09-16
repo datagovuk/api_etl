@@ -73,7 +73,7 @@ class PostgresLoader(Loader):
         reader = csv.DictReader(open(source_file), encoding=encoding)
         inserted = 0
         for row in reader:
-            if not self._row_exists(row[pk], pk, service_manifest.name):
+            if not self._row_exists(row, pk, service_manifest.name):
                 self._insert_row(service_manifest.name, row)
                 inserted += 1
 
@@ -103,9 +103,20 @@ class PostgresLoader(Loader):
         cur.close()
 
 
-    def _row_exists(self, id, column, tablename):
+    def _row_exists(self, row, pk, tablename):
+        if isinstance(pk, str):
+            pk = [pk]
+
         cur = self.conn.cursor()
-        cur.execute("SELECT count(*) FROM {tbl} WHERE {col}='{val}'".format(tbl=tablename, col=column, val=id))
+        query = "SELECT count(*) FROM {tbl} WHERE ".format(tbl=tablename)
+
+        where_clauses = []
+        for key in pk:
+             where_clauses.append("{col} = '{val}'".format(col=key, val=row[key]))
+
+        query += " AND ".join(where_clauses)
+
+        cur.execute(query)
         result = cur.fetchone()
         cur.close()
 
@@ -123,14 +134,19 @@ class PostgresLoader(Loader):
         pkname = self._get_pk_name(service_manifest)
 
         table_settings = service_manifest.table_settings
-        indices = [i.strip() for i in table_settings['index'].split(',')]
+        if 'index' in table_settings:
+            indices = [i.strip() for i in table_settings['index'].split(',')]
+        else:
+            indices = []
         print "  Indices are {}".format(indices)
 
         for h in headers:
-            if pkname and pkname == h:
-                columns.append("{} TEXT primary key".format(h))
-            else:
-                columns.append("{} TEXT".format(h))
+            columns.append("{} TEXT".format(h))
+
+        if isinstance(pkname, list):
+            columns.append("PRIMARY KEY ({})".format(", ".join(pkname)))
+        else:
+            columns.append("PRIMARY KEY ({})".format(pkname))
 
         q = """
             CREATE TABLE {}({});\n
