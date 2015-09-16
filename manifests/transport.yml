@@ -26,11 +26,13 @@ services:
       dataset: anonymised_mot_test
       table_settings:
         pk_name: testid
-        index: make
+        index: make, model, testresult
         unique_fields: testid
       searchables:
-        - name:
-          description:
-          query:
+        - name: year_and_make
+          description: Find tests by year for a specific make of car
+          query: select * from anonymised_mot_test where make = UPPER($1) AND date_part('year', testdate)::text = $2;
           fields:
-            - ""
+            - make
+            - year
+
