@@ -130,7 +130,7 @@ class MOTLoader(lib.loader.PostgresLoader):
             print "  Loading data into table {}".format(service_manifest.name)
             reader = csv.DictReader(open(source_file), encoding=encoding)
             for row in reader:
-                if not self._row_exists(row[pk], pk, service_manifest.name):
+                if not self._row_exists(row, pk, service_manifest.name):
                     self._insert_row(service_manifest.name, row)
                     inserted += 1
 
