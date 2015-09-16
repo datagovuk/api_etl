@@ -25,8 +25,7 @@ Installing ...
 1. Create a virtualenv, and activate it 
 2. ```git clone git@github.com:datagovuk/api_etl.git```
 3. ```python setup.py develop```
-4. Make a directory somewhere to store manifests
-5. Make a directory somewhere to store downloads
+4. Make a directory somewhere to store downloads
 
 
 ## Configuration
