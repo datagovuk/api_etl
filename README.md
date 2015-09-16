@@ -25,8 +25,7 @@ Installing ...
 1. Create a virtualenv, and activate it 
 2. ```git clone git@github.com:datagovuk/api_etl.git```
 3. ```python setup.py develop```
-4. Make a directory somewhere to store manifests
-5. Make a directory somewhere to store downloads
+4. Make a directory somewhere to store downloads
 
 
 ## Configuration
@@ -38,13 +37,16 @@ Before setting the configuration file, the following command should be run to ob
 ```
 etl database once 
 ```
+Now copy and paste the commands into the command-line
 
 ### Configuration file 
 
 Copy the sample.ini file and change the settings to reflect your setup.  Once the new .ini file is complete, the full path to the file should be set as an environment variable:
 
 ```
-export DGU_ETL_CONFIG='/var/etl/config.ini'
+mkdir /etc/dgu_etl
+cp dgu_etl/sample.ini /etc/dgu_etl/config.ini
+export DGU_ETL_CONFIG='/etc/dgu_etl/config.ini'
 ```
 
 Each command that requires config fill complain if this is not set as it will not be able to locate the configuration file.
@@ -75,6 +77,8 @@ etl service run health.hospitals
 
 ## Development
 
+### Development mode
+
 To stop downloads of content being performed every time you test something, you can set 
 
 ```
@@ -82,6 +86,39 @@ export DEV=1
 ```
 
 which will only download files if the target file does not exist.
+
+### Adding a theme
+
+Create a new manifest file in the manifests directory (like the others):
+
+    cp manifests/health.yml manifests/<theme>.yml
+    vim manifests/<theme>.yml
+
+Create a new directory in api_etl/services/ named after the theme:
+
+    mkdir api_etl/services/<theme>
+
+Create the __init__ where you'll later add the entrypoints for each service
+
+    cp api_etl/services/template/__init__.py api_etl/services/<theme>/
+
+Add the entrypoint to the module in setup.py:
+
+    vim setup.py
+    # add it in the list of services    
+    python setup.py develop
+
+
+### Adding a service (an ETL chain for a dataset)
+
+Create any custom ETL python code needed, to be referenced in the entrypoint.
+
+    cp api_etl/services/health/hospitals.py api_etl/services/<theme>/<service>.py
+    vim api_etl/services/<theme>/<service>.py
+
+Add the entrypoint:
+
+    vim api_etl/services/<theme>/__init__.py
 
 ## Notes
 

@@ -30,6 +30,7 @@ config = {
         'services': [
             'health = api_etl.services.health:entrypoints',
             'transport = api_etl.services.transport:entrypoints',
+            'companies = api_etl.services.companies:entrypoints',
         ]
     }
 }
