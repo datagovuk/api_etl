@@ -1,0 +1,21 @@
+title: Companies
+description: A collection of APIs that are related to UK Companies
+documentation_url: ""
+services:
+    - name: companies-basic
+      description: "Basic information about every company in Companies House"
+      documentation_url: ""
+      schema_url: ""
+      separator: comma
+      dataset: basic-company-data
+      table_settings:
+        pk_name: CompanyNumber
+        index: CompanyName
+        unique_fields: CompanyNumber
+      searchables:
+        - name: CompanyName
+          description: Find companies by name
+          query: select * from companies_basic where LOWER(CompanyName) = LOWER($1)
+          fields:
+            - CompanyName
+

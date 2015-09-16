@@ -1,5 +1,6 @@
 from pkg_resources import iter_entry_points
 
+#TODO: Is it themes & services or is it services & subservices?
 
 def service_names():
     """
@@ -24,4 +25,4 @@ def named_subservice(service_name, subservice):
     for ep in eps:
         if ep['name'] == subservice:
             return ep
-    raise ImportError("Could not find '{}' subservice in '{}'".format(subservice, service_name))
+    raise ImportError("Could not find service '{}' in theme '{}'".format(subservice, service_name))
