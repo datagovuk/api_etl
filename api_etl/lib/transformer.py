@@ -7,6 +7,7 @@ import chardet
 SEPARATORS = {
     'tab'  : '\t',
     'comma': ',',
+    'pipe' : '|',
     ''     : ',',
 }
 

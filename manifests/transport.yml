@@ -18,3 +18,19 @@ services:
           query: select * from  planned_road_works where LOWER(road) = LOWER($1)
           fields:
             - road
+    - name: anonymised_mot_test
+      description: "Anonymised MOT results"
+      documentation_url: ""
+      schema_url: ""
+      separator: pipe
+      dataset: anonymised_mot_test
+      table_settings:
+        pk_name: testid
+        index: make
+        unique_fields: testid
+      searchables:
+        - name:
+          description:
+          query:
+          fields:
+            - ""

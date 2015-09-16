@@ -73,6 +73,7 @@ class PostgresLoader(Loader):
         reader = csv.DictReader(open(source_file), encoding=encoding)
         inserted = 0
         for row in reader:
+            print row
             if not self._row_exists(row[pk], pk, service_manifest.name):
                 self._insert_row(service_manifest.name, row)
                 inserted += 1

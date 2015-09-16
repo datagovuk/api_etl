@@ -78,23 +78,35 @@ class ServiceCommand(cmd.Cmd):
         path = extractor.extract(self.config.manifest('working_folder'), service_manifest)
         print "  Downloaded content to {}".format(path)
 
-        transformer = entry_points['transformer']()
-        print "\nTransforming data"
-        self.print_separator()
-        count = transformer.transform(service_manifest, path, path + ".out")
-        print "  Wrote {} rows to {}".format(count, path + ".out")
-
-        loader = entry_points['loader']()
-        print "\nLoading data"
-        self.print_separator()
-
-        loader.init_connection(theme)
-        if not loader.table_exists(service_manifest):
-            loader.create_table(service_manifest, path + ".out")
+        transformer = entry_points['transformer']
+        if not transformer:
+            print "No transformer"
         else:
-            print "  Table already exists in DB"
-        loader.load_data(service_manifest, path + ".out", transformer.encoding)
-        loader.close_connection()
+            print "\nTransforming data"
+            self.print_separator()
+            count = transformer().transform(service_manifest, path, path + ".out")
+            print "  Wrote {} rows to {}".format(count, path + ".out")
+
+        loader = entry_points['loader']
+        if not loader:
+            print "No loader"
+        else:
+            loader = loader()
+            print "\nLoading data"
+            self.print_separator()
+
+            loader.init_connection(theme)
+            if not loader.table_exists(service_manifest):
+                loader.create_table(service_manifest, path + ".out")
+            else:
+                print "  Table already exists in DB"
+
+            encoding = 'utf-8'
+            if hasattr(transformer, 'encoding'):
+                encoding = transformer.encoding
+
+            loader.load_data(service_manifest, path + ".out", encoding)
+            loader.close_connection()
 
 
     def load_data(self, service_manifest, source_file):

@@ -1,5 +1,6 @@
 
 import planned_road_works as r
+import mot as m
 import api_etl.lib.extractor as e
 import api_etl.lib.loader as l
 
@@ -11,6 +12,13 @@ def entrypoints():
         'extractor': r.PlannedRoadWorksExtractor,
         'transformer': r.PlannedRoadWorksTransformer,
         'loader': r.PlannedRoadWordsLoader,
+    },
+    {
+        'name': 'anonymised_mot_test',
+        'extractor': m.MOTExtractor,
+        'transformer': m.MOTTransformer,
+        'loader': m.MOTLoader,
     }]
+
 
 
