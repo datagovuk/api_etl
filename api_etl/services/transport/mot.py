@@ -133,10 +133,12 @@ class MOTLoader(lib.loader.PostgresLoader):
                 if not self._row_exists(row[pk], pk, service_manifest.name):
                     self._insert_row(service_manifest.name, row)
                     inserted += 1
+
+                if inserted % 100 == 0:
                     self.conn.commit()
 
-            #if inserted:
-            #    self.conn.commit()
+            if inserted:
+                self.conn.commit()
 
         print "  Inserted {} rows into database".format(inserted)
 
