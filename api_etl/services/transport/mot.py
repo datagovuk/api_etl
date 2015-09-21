@@ -82,14 +82,8 @@ class MOTTransformer(lib.Transformer):
                 print " ... skipping in DEV mode"
                 return output_dir
 
-            detector = UniversalDetector()
-            with opener(filename) as input_file:
-                for line in input_file.readlines():
-                    detector.feed(line)
-                    if detector.done:
-                        break
-                    detector.close()
-            self.encoding = detector.result.get('encoding', 'windows-1252')
+            encoding_check = chardet.detect(opener(filename).read())
+            self.encoding = encoding_check.get('encoding', 'windows-1252')
             print "  .... {}".format(self.encoding)
 
             headers = FIELD_NAMES
