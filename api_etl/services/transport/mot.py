@@ -1,6 +1,7 @@
 import unicodecsv as csv
 import os
 import gzip
+import chardet
 
 
 import ckanapi
