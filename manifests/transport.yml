@@ -12,6 +12,7 @@ services:
         pk_name: reference_number
         index: road
         unique_fields: reference_number
+        choice_fields:
       searchables:
         - name: road
           description: Find planned and historical roadworks by road (e.g. M1)
@@ -28,6 +29,13 @@ services:
         pk_name: testid
         index: make, model, testresult
         unique_fields: testid
+        choice_fields:
+          - make
+          - postcoderegion
+          - testclassid
+          - fueltype
+          - testresult
+          - colour
       searchables:
         - name: year_and_make
           description: Find tests by year for a specific make of car
