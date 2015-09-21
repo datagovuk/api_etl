@@ -1,6 +1,8 @@
 import unicodecsv as csv
 import os
-import chardet
+from chardet.universaldetector import UniversalDetector
+import gzip
+import re
 
 
 import ckanapi
@@ -66,7 +68,11 @@ class MOTTransformer(lib.Transformer):
 
         row_count = 0
         for filename in os.listdir(input_dir):
-            if not filename.endswith('.txt'):
+            if filename.endswith('.txt'):
+                opener = open
+            elif filename.endswith('.txt.gz'):
+                opener = gzip.open
+            else:
                 continue
 
             output_filename = os.path.join(output_dir, filename)
@@ -76,13 +82,19 @@ class MOTTransformer(lib.Transformer):
                 print " ... skipping in DEV mode"
                 return output_dir
 
-            encoding_check = chardet.detect(open(filename).read())
-            self.encoding = encoding_check.get('encoding', 'windows-1252')
+            detector = UniversalDetector()
+            with opener(filename) as input_file:
+                for line in input_file.readlines():
+                    detector.feed(line)
+                    if detector.done:
+                        break
+                    detector.close()
+            self.encoding = detector.result.get('encoding', 'windows-1252')
             print "  .... {}".format(self.encoding)
 
             headers = FIELD_NAMES
 
-            with open(filename) as input_file:
+            with opener(filename) as input_file:
                 reader = csv.reader(input_file,encoding=self.encoding, delimiter="|")
 
                 print "  Transforming data ..."
