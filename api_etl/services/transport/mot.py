@@ -10,11 +10,11 @@ import api_etl.lib as lib
 from api_etl.util import slugify_name
 
 FIELD_NAMES = [
-   "TESTID", "VEHICLEID", "TESTDATE",
+    "TESTID", "VEHICLEID", "TESTDATE",
     "TESTCLASSID", "TESTTYPE", "TESTRESULT",
     "TESTMILEAGE", "POSTCODEREGION", "MAKE",
     "MODEL",  "COLOUR",  "FUELTYPE",
-    "CYLCPCTY",  "FIRSTUSEDATE"
+    "CYLCPCTY",  "FIRSTUSEDATE", "YEAR"
 ]
 
 class MOTExtractor(lib.Extractor):
@@ -101,8 +101,14 @@ class MOTTransformer(lib.Transformer):
 
     def transform_row(self, row_in):
         if row_in[-1] == 'NULL':
-            row_in = '';
-        return row_in
+            return ''
+
+        try:
+            year = row_in[2][:4]
+        except:
+            year = None
+
+        return row_in + [year]
 
     def new_header_rows(self, headers):
         return FIELD_NAMES
@@ -161,7 +167,8 @@ class MOTLoader(lib.loader.PostgresLoader):
             colour text,
             fueltype text,
             cylcpcty integer,
-            firstusedate timestamp
+            firstusedate timestamp,
+            year integer
         );"""
 
 
