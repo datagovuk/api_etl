@@ -1,8 +1,6 @@
 import unicodecsv as csv
 import os
-from chardet.universaldetector import UniversalDetector
 import gzip
-import re
 
 
 import ckanapi
