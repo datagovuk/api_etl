@@ -1,4 +1,5 @@
 import os
+import zipfile
 
 import ckanapi
 import requests
@@ -42,3 +43,56 @@ class CKANExtractor(Extractor):
                         f.flush()
 
         return target_file
+
+
+class CKANZipExtractor(CKANExtractor):
+    """ Retrieves data from CKAN and unzips it """
+
+    def extract(self, working_folder, service_manifest):
+        zipped_file = CKANExtractor.extract(self, working_folder, service_manifest)
+
+        target_path = zipped_file.replace('.zip', '')
+        if target_path == zipped_file:
+            target_path = zipped_file + '.unzipped'
+
+        # TODO: Remove this ...
+        if os.environ.get('DEV') and os.path.exists(target_path) \
+                and os.listdir(target_path):
+            print "  Skipping unzip during dev"
+        else:
+            print "  Unzipping..."
+            self.unzip(zipped_file, target_path)
+            print "  ...unzipped"
+
+        files = os.listdir(target_path)
+        if len(files) == 1:
+            return os.path.join(target_path, files[0])
+        elif len(files) == 0:
+            raise Exception('No files in the zip')
+        else:
+            try:
+                if service_manifest.filename_in_zip not in files:
+                    raise Exception('Cannot find filename %r in zipped files %r' %
+                                    (service_manifest.filename_in_zip, files))
+            except AttributeError:
+                raise Exception(
+                    'Multiple files in zip - specify which one '
+                    'using filename_in_zip option in manifest. '
+                    'Dir: %s Files: %s' %
+                    (target_path, files))
+
+            return os.path.join(target_path, service_manifest.filename_in_zip)
+
+    def unzip(self, source_filename, dest_dir):
+        with zipfile.ZipFile(source_filename) as zf:
+            for member in zf.infolist():
+                # Path traversal defense copied from
+                # http://hg.python.org/cpython/file/tip/Lib/http/server.py#l789
+                words = member.filename.split('/')
+                path = dest_dir
+                for word in words[:-1]:
+                    drive, word = os.path.splitdrive(word)
+                    head, word = os.path.split(word)
+                    if word in (os.curdir, os.pardir, ''): continue
+                    path = os.path.join(path, word)
+                zf.extract(member, path)

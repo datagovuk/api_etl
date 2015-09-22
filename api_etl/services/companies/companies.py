@@ -25,10 +25,13 @@ class CompaniesBasicTransformer(lib.Transformer):
         # TODO: Trim lat/lng down to more realistic resolution
 
         # Take a partial postcode so we can search for it ...
-        if row['postcode']:
-            row['partial_postcode'] = row['postcode'].split(' ')[0].strip()
-        else:
-            row['postcode'] = ''
+        try:
+            if row['reg_address_post_code']:
+                row['partial_postcode'] = row['reg_address_post_code'].split(' ')[0].strip()
+            else:
+                row['reg_address_post_code'] = ''
+        except KeyError, e:
+            raise Exception('Row missing from %r: %s' % (row.keys(), e))
 
         return row
 
