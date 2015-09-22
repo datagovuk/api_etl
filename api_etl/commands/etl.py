@@ -5,6 +5,7 @@ import sys
 import api_etl.lib.services as svcs
 from api_etl.lib.manifest import Manifest
 
+
 class DbCommand(cmd.Cmd):
 
     def do_once(self, args):
@@ -65,7 +66,6 @@ class ServiceCommand(cmd.Cmd):
     def print_separator(self, c='*'):
         print c * 60
 
-
     def run_etl(self, theme, entry_points, service_manifest):
         """ Runs ETL by finding the manifest for each service based on the name"""
         self.print_separator('=')
@@ -80,28 +80,39 @@ class ServiceCommand(cmd.Cmd):
         print "  Extracted content at {}".format(extracted_filepath)
 
         # Transform
-        transformer = entry_points['transformer']()
-        print "\nTransforming data"
-        self.print_separator()
-        transformed_filepath = os.path.join(self.config.manifest('working_folder'),
-                                            service_manifest.name,
-                                            'transformed.out')
-        count = transformer.transform(service_manifest, extracted_filepath, transformed_filepath)
-        print "  Wrote {} rows to {}".format(count, transformed_filepath)
+        transformer = entry_points['transformer']
+        if not transformer:
+            print "No transformer"
+        else:
+            print "\nTransforming data"
+            self.print_separator()
+            transformed_filepath = os.path.join(self.config.manifest('working_folder'),
+                                                service_manifest.name,
+                                                'transformed.out')
+            count = transformer().transform(service_manifest, extracted_filepath, transformed_filepath)
+            print "  Wrote {} rows to {}".format(count, transformed_filepath)
 
         # Load
-        loader = entry_points['loader']()
-        print "\nLoading data"
-        self.print_separator()
-
-        loader.init_connection(theme)
-        if not loader.table_exists(service_manifest):
-            loader.create_table(service_manifest, transformed_filepath)
+        loader = entry_points['loader']
+        if not loader:
+            print "No loader"
         else:
-            print "  Table already exists in DB"
-        loader.load_data(service_manifest, transformed_filepath, transformer.encoding)
-        loader.close_connection()
+            loader = loader()
+            print "\nLoading data"
+            self.print_separator()
 
+            loader.init_connection(theme)
+            if not loader.table_exists(service_manifest):
+                loader.create_table(service_manifest, transformed_filepath)
+            else:
+                print "  Table already exists in DB"
+
+            encoding = 'utf-8'
+            if hasattr(transformer, 'encoding'):
+                encoding = transformer.encoding
+
+            loader.load_data(service_manifest, transformed_filepath, encoding)
+            loader.close_connection()
 
     def load_data(self, service_manifest, source_file):
         pass

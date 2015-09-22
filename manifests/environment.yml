@@ -1,0 +1,25 @@
+title: Environment
+description: A collection of APIs that are related to UK Environment
+documentation_url: ""
+services:
+    - name: oatmeal_millers
+      description: "Presents data on UK Cereals Usage by Oatmeal Miller."
+      documentation_url: ""
+      schema_url: ""
+      separator: tab
+      resource: a5c5cd18-2536-4c59-98ab-19c9dc3a96b7
+      table_settings:
+        pk_name: [year, quarter]
+      searchables:
+        - name: all_years
+          description: Show all cereal usage
+          query: select * from oatmeal_millers
+          fields:
+        - name: year
+          description: Show cereal usage by year
+          query: select * from oatmeal_millers where year = $1
+          fields:
+            - year
+        - name: year_totals
+          description: Show cereal usage year totals
+          query: select year, sum(oats_milled::float) as total_oats_milled, sum(oat_flakes_and_rolled_oats::float) as oat_flakes_and_rolled_oats_total, sum(oat_flour_and_other_cuts::float) as oat_flour_and_other_cuts_total, sum(closing_stocks::float) as closing_stocks_total from oatmeal_millers group by year order by year desc;
