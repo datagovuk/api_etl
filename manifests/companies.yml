@@ -9,6 +9,7 @@ services:
       separator: comma
       dataset: basic-company-data
       resource: f794d571-5646-4847-b5de-f63e3b2f7c12
+      encoding: utf8
       table_settings:
         pk_name: CompanyNumber
         index: CompanyName

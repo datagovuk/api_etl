@@ -8,7 +8,7 @@ def entrypoints():
     this theme """
     return [{
         'name': 'companies-basic',
-        'extractor': e.CKANExtractor,
+        'extractor': e.CKANZipExtractor,
         'transformer': companies.CompaniesBasicTransformer,
         'loader': l.PostgresLoader,
     },
