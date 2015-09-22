@@ -1,8 +1,7 @@
 # coding=utf-8
-from api_etl.util import slugify_name
-
 import unicodecsv as csv
 import chardet
+import sys
 
 SEPARATORS = {
     'tab'  : '\t',
@@ -10,14 +9,21 @@ SEPARATORS = {
     ''     : ',',
 }
 
+CHARDET_SAMPLE_SIZE = 1000*1024  # do chardet on the first few KB of the file
+
+
 class Transformer(object):
 
     def transform(self, service_manifest, input_filename, output_filename):
 
-        print "  Determining encoding ..."
-        encoding_check = chardet.detect(open(input_filename).read())
-        self.encoding = encoding_check.get('encoding', 'windows-1252')
-        print "  .... {}".format(self.encoding)
+        # Encoding
+        if hasattr(service_manifest, 'encoding'):
+            self.encoding = service_manifest.encoding
+        else:
+            print "  Determining encoding ..."
+            encoding_check = chardet.detect(open(input_filename).read(CHARDET_SAMPLE_SIZE))
+            self.encoding = encoding_check.get('encoding', 'windows-1252')
+            print "  .... {}".format(self.encoding)
 
         row_count = 0
         with open(input_filename) as input_file:
@@ -32,11 +38,30 @@ class Transformer(object):
                 writer = csv.DictWriter(output_file, fieldnames=headers)
                 writer.writeheader()
 
-                for row in reader:
-                    new_row = self.transform_row(row)
-                    if new_row:
-                        writer.writerow(new_row)
-                        row_count += 1
+                try:
+                    for row in reader:
+                        # Progress bar
+                        sys.stdout.write(
+                            "\rTransforming data row {0}".format(row_count + 1)
+                        )
+                        sys.stdout.flush()
+
+                        this_row = row
+                        new_row = self.transform_row(row)
+
+                        if new_row:
+                            writer.writerow(new_row)
+                            row_count += 1
+                        # this_row records the current row, so if there is an
+                        # exception during the "for" step, we know it wasn't
+                        # the row before that caused it (the value of row)
+                        this_row = None
+                except Exception:
+                    row_repr = repr(this_row) if this_row != None \
+                        else 'PREVIOUS ONE: ' + repr(row)
+                    print 'Exception occurred processing data row %s: %s' % \
+                        (row_count + 1, row_repr)
+                    raise
         return row_count
 
     def new_header_rows(self, headers):
