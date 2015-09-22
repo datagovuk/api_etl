@@ -38,7 +38,6 @@ class MOTExtractor(lib.Extractor):
         for resource in required_resources:
             target_file = os.path.join(wf, resource['url'].split('/')[-1])
             self.download_file(resource['url'], target_file)
-            break
 
         return wf
 
