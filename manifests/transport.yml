@@ -8,6 +8,7 @@ services:
       schema_url: ""
       separator: comma
       dataset: highways_agency_planned_roadworks
+      encoding: ascii
       table_settings:
         pk_name: reference_number
         index: road
@@ -24,11 +25,20 @@ services:
       documentation_url: ""
       schema_url: ""
       separator: pipe
+      encoding: ascii
       dataset: anonymised_mot_test
       table_settings:
         pk_name: testid
-        index: make, model, testresult
+        index: make, model, testresult, year
         unique_fields: testid
+        filter_fields:
+          - make
+          - postcoderegion
+          - testclassid
+          - fueltype
+          - testresult
+          - colour
+          - year
         choice_fields:
           - make
           - postcoderegion
@@ -36,6 +46,7 @@ services:
           - fueltype
           - testresult
           - colour
+          - year
       searchables:
         - name: year_and_make
           description: Find tests by year for a specific make of car
