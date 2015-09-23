@@ -25,9 +25,8 @@ class MOTExtractor(lib.Extractor):
         if not os.path.exists(wf):
             os.makedirs(wf)
 
-        #ckan = ckanapi.RemoteCKAN('https://data.gov.uk',
-        #    user_agent='dgu_api_etl/0.1 (+http://data.gov.uk)')
-        #package = ckan.action.package_show(id=service_manifest.dataset)
+        if os.environ.get('NOFETCH', False):
+            return wf
 
         package = requests.get("https://data.gov.uk/api/3/action/package_show?id=" + service_manifest.dataset).json()
         required_resources = []
@@ -38,6 +37,7 @@ class MOTExtractor(lib.Extractor):
         for resource in required_resources:
             target_file = os.path.join(wf, resource['url'].split('/')[-1])
             self.download_file(resource['url'], target_file)
+            break
 
         return wf
 
@@ -77,11 +77,10 @@ class MOTTransformer(lib.Transformer):
             filename = os.path.join(input_dir, filename)
 
             if os.environ.get('DEV') and os.path.exists(output_filename):
-                print " ... skipping in DEV mode"
+                print " ... skipping in DEV mode as file exists"
                 return output_dir
 
-            encoding_check = chardet.detect(opener(filename).read())
-            self.encoding = encoding_check.get('encoding', 'windows-1252')
+            self.encoding = service_manifest.encoding
             print "  .... {}".format(self.encoding)
 
             headers = FIELD_NAMES
