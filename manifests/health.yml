@@ -86,6 +86,54 @@ services:
           query: select * from social_care_locations where LOWER(organisation_name) = LOWER($1)
           fields:
             - organisation_name
+    - name: dental_practices
+      description: "Location of General Dental Practices"
+      documentation_url: ""
+      schema_url: https://raw.githubusercontent.com/datagovuk/health-schemas/master/egdpprac.json
+      separator: comma
+      resource: d1d9c708-2cbe-4912-bb3f-8e1014884e2a
+      table_settings:
+        pk_name: organisation_code
+        index: partial_postcode, name
+        unique_fields: organisation_code
+      searchables:
+        - name: partial_postcode
+          description: Find dental practices with a partial postcode  (e.g. CH64, or L1)
+          query: select * from dental_practices where LOWER(partial_postcode) = LOWER($1)
+          fields:
+            - partial_postcode
+        - name: name
+          description: Find hospitals by name
+          query: select * from dental_practices where LOWER(ma,e) ILIKE '%' || LOWER($1) || '%'
+          fields:
+            - name
+    - name: pharmacies
+      description: "Information about pharmacies"
+      documentation_url: ""
+      schema_url: https://raw.githubusercontent.com/datagovuk/health-schemas/master/Pharmacy.json
+      separator: tab
+      resource: 882e57fe-4809-4cd5-80ea-f2b81a695050
+      table_settings:
+        pk_name: organisation_code
+        index: partial_postcode, organisation_name
+        unique_fields: organisation_code
+      searchables:
+        - name: partial_postcode
+          description: Find pharmacies with a partial postcode  (e.g. CH64, or L1)
+          query: select * from pharmacies where LOWER(partial_postcode) = LOWER($1)
+          fields:
+            - partial_postcode
+        - name: name
+          description: Find pharmacies by name
+          query: select * from pharmacies where LOWER(ma,e) ILIKE '%' || LOWER($1) || '%'
+          fields:
+            - organisation_name
+
+
+
+
+
+
 
 
 
