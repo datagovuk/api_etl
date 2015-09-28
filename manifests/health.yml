@@ -12,6 +12,12 @@ services:
         pk_name: organisation_id
         index: partial_postcode, organisation_name
         unique_fields: organisation_name, postcode
+        filter_fields:
+          - city
+          - county
+        choice_fields:
+          - city
+          - county
       searchables:
         - name: partial_postcode
           description: Find hospitals with a partial postcode  (e.g. CH64, or L1)
@@ -33,6 +39,12 @@ services:
         pk_name: organisation_id
         index: partial_postcode, organisation_name
         unique_fields: organisation_name, postcode
+        filter_fields:
+          - city
+          - county
+        choice_fields:
+          - city
+          - county
       searchables:
         - name: partial_postcode
           description: Find clinics with a partial postcode (e.g. CH64, or L1)
@@ -54,6 +66,12 @@ services:
         pk_name: organisation_id
         index: partial_postcode, organisation_name
         unique_fields: organisation_name, postcode
+        filter_fields:
+          - city
+          - county
+        choice_fields:
+          - city
+          - county
       searchables:
         - name: partial_postcode
           description: Find surgeries with a partial postcode (e.g. CH64, or L1)
@@ -75,6 +93,12 @@ services:
         pk_name: organisation_id
         index: partial_postcode, organisation_name
         unique_fields: organisation_name, postcode
+        filter_fields:
+          - city
+          - county
+        choice_fields:
+          - city
+          - county
       searchables:
         - name: partial_postcode
           description: Find locations with a partial postcode (e.g. CH64, or L1)
@@ -117,6 +141,12 @@ services:
         pk_name: organisation_code
         index: partial_postcode, organisation_name
         unique_fields: organisation_code
+        filter_fields:
+          - city
+          - county
+        choice_fields:
+          - city
+          - county
       searchables:
         - name: partial_postcode
           description: Find pharmacies with a partial postcode  (e.g. CH64, or L1)
