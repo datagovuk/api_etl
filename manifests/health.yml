@@ -128,7 +128,7 @@ services:
             - partial_postcode
         - name: name
           description: Find hospitals by name
-          query: select * from dental_practices where LOWER(ma,e) ILIKE '%' || LOWER($1) || '%'
+          query: select * from dental_practices where LOWER(name) ILIKE '%' || LOWER($1) || '%'
           fields:
             - name
     - name: pharmacies
