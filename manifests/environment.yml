@@ -7,9 +7,10 @@ services:
       documentation_url: ""
       schema_url: ""
       separator: tab
+      dataset: "cereals_usage_by_oatmeal_millers_in_the_uk"
       resource: a5c5cd18-2536-4c59-98ab-19c9dc3a96b7
       table_settings:
-        pk_name: [year, quarter]
+        - pk_name: [year, quarter]
       searchables:
         - name: all_years
           description: Show all cereal usage
