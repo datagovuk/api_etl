@@ -25,6 +25,7 @@ services:
       documentation_url: ""
       schema_url: ""
       separator: pipe
+      large_dataset: true
       encoding: ascii
       dataset: anonymised_mot_test
       table_settings:
