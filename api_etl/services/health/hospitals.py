@@ -75,7 +75,7 @@ class HospitalTransformer(lib.Transformer):
     def new_header_rows(self, headers):
         """ When implemented in a subclass, returns the potentially modified header rows """
         for header in headers:
-            self.header_map[header] = slugify_name(header).lower()
+            self.header_map[header.lower()] = slugify_name(header).lower()
 
         self.header_map['partial_postcode'] = 'partial_postcode'
 
