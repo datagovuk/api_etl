@@ -51,7 +51,7 @@ services:
       searchables:
         - name: year_and_make
           description: Find tests by year for a specific make of car
-          query: select * from anonymised_mot_test where make = UPPER($1) AND date_part('year', testdate)::text = $2;
+          query: select * from anonymised_mot_test where make = UPPER($1) AND date_part('year', testdate)::text = $2 limit 500;
           fields:
             - make
             - year
