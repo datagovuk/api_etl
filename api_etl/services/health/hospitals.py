@@ -64,18 +64,25 @@ class HospitalTransformer(lib.Transformer):
 
         # TODO: Trim lat/lng down to more realistic resolution
 
+        def find_postcode_key(r):
+            for k in r:
+                if k.lower() == 'postcode':
+                    return k
+            return ""
+
         # Take a partial postcode so we can search for it ...
-        if row[self.header_map['postcode']]:
-            row['partial_postcode'] = self.header_map['postcode'].split(' ')[0].strip()
-        else:
-            row[self.header_map['postcode']] = ""
+        row['partial_postcode'] = ""
+        postcode_key = find_postcode_key(row_in.keys())
+        if postcode_key:
+            if row_in[postcode_key]:
+                row['partial_postcode'] = row_in[postcode_key].split(' ')[0].strip()
 
         return row
 
     def new_header_rows(self, headers):
         """ When implemented in a subclass, returns the potentially modified header rows """
         for header in headers:
-            self.header_map[header.lower()] = slugify_name(header).lower()
+            self.header_map[header] = slugify_name(header).lower()
 
         self.header_map['partial_postcode'] = 'partial_postcode'
 
