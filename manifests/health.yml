@@ -14,8 +14,8 @@ services:
         index: partial_postcode, organisation_name
         unique_fields: organisation_name, postcode
         filter_fields:
-          - city
           - county
+          - city
         choice_fields:
           - city
           - county
