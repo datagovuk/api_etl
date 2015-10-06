@@ -7,8 +7,9 @@ services:
       documentation_url: ""
       schema_url: https://raw.githubusercontent.com/datagovuk/health-schemas/master/Hospital.json
       separator: tab
+      encoding: windows-1252
       dataset: hospitals_
-      resource: 2e72ee42-c652-4caf-809c-3613985e5d1d
+      resource: e0f24144-fdfd-4dff-b940-69c737cbc7b4
       table_settings:
         pk_name: organisation_id
         index: partial_postcode, organisation_name
@@ -35,8 +36,9 @@ services:
       description: "Location of NHS Clinics"
       schema_url: https://raw.githubusercontent.com/datagovuk/health-schemas/master/Clinics.json
       separator: tab
+      encoding: windows-1252
       dataset: clinics
-      resource: 7dc4cad0-477c-4c38-a8cb-45557b294cd4
+      resource: 721b0e82-6aac-4d47-98dd-3d5cbd450ad5
       table_settings:
         pk_name: organisation_id
         index: partial_postcode, organisation_name
@@ -63,8 +65,9 @@ services:
       description: "GP Surgeries"
       schema_url: https://raw.githubusercontent.com/datagovuk/health-schemas/master/GP.json
       separator: tab
+      encoding: windows-1252
       dataset: gp-practices-and-surgeries
-      resource: 53328959-a0df-40b7-becb-7350d5a9754d
+      resource: 9fa08f45-5c17-4e06-9dd7-1b925a09917a
       table_settings:
         pk_name: organisation_id
         index: partial_postcode, organisation_name
@@ -91,8 +94,9 @@ services:
       description: "Social Care service locations"
       schema_url: http://data.gov.uk/data/resource/nhschoices/SCL.csv
       separator: tab
+      encoding: windows-1252
       dataset: social-care-locations
-      resource: fc0e3df5-e352-4d12-b585-4e64c0852576
+      resource: dedbab26-15d6-471a-b50e-4e4e88a470da
       table_settings:
         pk_name: organisation_id
         index: partial_postcode, organisation_name
@@ -121,6 +125,7 @@ services:
       separator: comma
       dataset: general-dental-practices
       resource: d1d9c708-2cbe-4912-bb3f-8e1014884e2a
+      encoding: windows-1252
       table_settings:
         pk_name: organisation_code
         index: partial_postcode, name
@@ -142,7 +147,8 @@ services:
       schema_url: https://raw.githubusercontent.com/datagovuk/health-schemas/master/Pharmacy.json
       separator: tab
       dataset: pharmacies
-      resource: 882e57fe-4809-4cd5-80ea-f2b81a695050
+      encoding: windows-1252
+      resource: 867f8b0c-fb58-492c-9adb-a37b1abc4fc2
       table_settings:
         pk_name: organisation_code
         index: partial_postcode, organisation_name

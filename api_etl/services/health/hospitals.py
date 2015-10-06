@@ -1,5 +1,45 @@
+import os
+import ckanapi
+import requests
+
 import api_etl.lib as lib
 from api_etl.util import slugify_name
+
+class HSCICExtractor(lib.Transformer):
+
+    def extract(self, working_folder, service_manifest):
+        wf = os.path.join(working_folder, service_manifest.name)
+        if not os.path.exists(wf):
+            os.mkdir(wf)
+
+        print "  Extracting content to {}".format(wf)
+
+        print "  Fetching resource ({}) metadata".format(service_manifest.resource)
+        ckan = ckanapi.RemoteCKAN('https://data.gov.uk',
+            user_agent='dgu_api_etl/0.1 (+https://data.gov.uk)')
+        resource = ckan.action.resource_show(id=service_manifest.resource)
+
+        target_file = os.path.join(wf, service_manifest.name + "." + resource['format'].lower())
+
+        # TODO: Remove this ...
+        if os.environ.get('DEV') and os.path.exists(target_file):
+            print "  Skipping file during dev"
+        else:
+            r = requests.get(resource['url'], stream=True)
+            with open(target_file, 'wb') as f:
+                for chunk in r.iter_content(chunk_size=4096):
+                    if chunk:
+                        f.write(chunk)
+                        f.flush()
+
+        print "  Desquiggling file"
+        from api_etl.tools.dedelimiter import convert_squiggle_to_tabs
+        content = convert_squiggle_to_tabs(target_file)
+
+        open(target_file, 'wb').write(content)
+
+        return target_file
+
 
 
 class HospitalTransformer(lib.Transformer):
@@ -19,23 +59,23 @@ class HospitalTransformer(lib.Transformer):
                 print "BAD DATA in source: {}".format(row_in)
                 print "*" * 30
                 return None
-            else:
-                row[self.header_map[k]] = v
+
+            row[self.header_map[k]] = v
 
         # TODO: Trim lat/lng down to more realistic resolution
 
         # Take a partial postcode so we can search for it ...
-        if row['postcode']:
-            row['partial_postcode'] = row['postcode'].split(' ')[0].strip()
+        if row[self.header_map['postcode']]:
+            row['partial_postcode'] = self.header_map['postcode'].split(' ')[0].strip()
         else:
-            row['postcode'] = ''
+            row[self.header_map['postcode']] = ""
 
         return row
 
     def new_header_rows(self, headers):
         """ When implemented in a subclass, returns the potentially modified header rows """
         for header in headers:
-            self.header_map[header] = slugify_name(header)
+            self.header_map[header] = slugify_name(header).lower()
 
         self.header_map['partial_postcode'] = 'partial_postcode'
 

@@ -8,31 +8,31 @@ def entrypoints():
     the health services module """
     return [{
         'name': 'hospitals',
-        'extractor': e.CKANExtractor,
+        'extractor': h.HSCICExtractor,
         'transformer': h.HospitalTransformer,
         'loader': l.PostgresLoader,
     },
     {
         'name': 'clinics',
-        'extractor': e.CKANExtractor,
+        'extractor': h.HSCICExtractor,
         'transformer': h.HospitalTransformer, # Use same transformer as hospitals
         'loader': l.PostgresLoader,
     },
     {
         'name': 'gp_surgeries',
-        'extractor': e.CKANExtractor,
+        'extractor': h.HSCICExtractor,
         'transformer': h.HospitalTransformer, # Use same transformer as hospitals
         'loader': l.PostgresLoader,
     },
     {
         'name': 'social_care_locations',
-        'extractor': e.CKANExtractor,
+        'extractor': h.HSCICExtractor,
         'transformer': h.HospitalTransformer, # Use same transformer as hospitals
         'loader': l.PostgresLoader,
     },
     {
         'name': 'pharmacies',
-        'extractor': e.CKANExtractor,
+        'extractor': h.HSCICExtractor,
         'transformer': h.HospitalTransformer, # Use same transformer as hospitals
         'loader': l.PostgresLoader,
     },
