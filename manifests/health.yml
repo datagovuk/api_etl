@@ -167,7 +167,7 @@ services:
             - partial_postcode
         - name: name
           description: Find pharmacies by name
-          query: select * from pharmacies where LOWER(ma,e) ILIKE '%' || LOWER($1) || '%'
+          query: select * from pharmacies where LOWER(organisation_name) ILIKE '%' || LOWER($1) || '%'
           fields:
             - organisation_name
 
