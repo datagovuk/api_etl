@@ -57,7 +57,7 @@ services:
             - partial_postcode
         - name: organisation_name
           description: Find clinics by name
-          query: select * from clinics where LOWER(organisation_name) = LOWER($1)
+          query: select * from clinics where LOWER(organisation_name) LIKE '%' || LOWER($1) || '%';
           fields:
             - organisation_name
     - name: gp_surgeries
@@ -86,7 +86,7 @@ services:
             - partial
         - name: organisation_name
           description: Find surgeries by name
-          query: select * from gp_surgeries where LOWER(organisation_name) = LOWER($1)
+          query: select * from gp_surgeries where LOWER(organisation_name) LIKE '%' || LOWER($1) || '%'
           fields:
             - organisation_name
     - name: social_care_locations
@@ -115,7 +115,7 @@ services:
             - partial_postcode
         - name: organisation_name
           description: Find locations by name
-          query: select * from social_care_locations where LOWER(organisation_name) = LOWER($1)
+          query: select * from social_care_locations where LOWER(organisation_name) LIKE '%' || LOWER($1) || '%'
           fields:
             - organisation_name
     - name: dental_practices
