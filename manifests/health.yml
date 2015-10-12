@@ -22,7 +22,7 @@ services:
           - county
       searchables:
         - name: partial_postcode
-          description: Find hospitals with a partial postcode  (e.g. CH64, or L1)
+          description: Find hospitals using just a partial postcode  (e.g. CH64, or L1)
           query: select * from hospitals where LOWER(partial_postcode) = LOWER($1)
           fields:
             - partial_postcode
@@ -51,7 +51,7 @@ services:
           - county
       searchables:
         - name: partial_postcode
-          description: Find clinics with a partial postcode (e.g. CH64, or L1)
+          description: Find clinics using just a partial postcode (e.g. CH64, or L1)
           query: select * from clinics where LOWER(partial_postcode) = LOWER($1)
           fields:
             - partial_postcode
@@ -80,7 +80,7 @@ services:
           - county
       searchables:
         - name: partial_postcode
-          description: Find surgeries with a partial postcode (e.g. CH64, or L1)
+          description: Find surgeries using just a partial postcode (e.g. CH64, or L1)
           query: select * from gp_surgeries where LOWER(partial_postcode) = LOWER($1)
           fields:
             - partial
@@ -109,7 +109,7 @@ services:
           - county
       searchables:
         - name: partial_postcode
-          description: Find locations with a partial postcode (e.g. CH64, or L1)
+          description: Find locations using just a partial postcode (e.g. CH64, or L1)
           query: select * from social_care_locations where LOWER(partial_postcode) = LOWER($1)
           fields:
             - partial_postcode
@@ -132,7 +132,7 @@ services:
         unique_fields: organisation_code
       searchables:
         - name: partial_postcode
-          description: Find dental practices with a partial postcode  (e.g. CH64, or L1)
+          description: Find dental practices using just a partial postcode (e.g. CH64, or L1)
           query: select * from dental_practices where LOWER(partial_postcode) = LOWER($1)
           fields:
             - partial_postcode
@@ -161,7 +161,7 @@ services:
           - county
       searchables:
         - name: partial_postcode
-          description: Find pharmacies with a partial postcode  (e.g. CH64, or L1)
+          description: Find pharmacies using just a partial postcode  (e.g. CH64, or L1)
           query: select * from pharmacies where LOWER(partial_postcode) = LOWER($1)
           fields:
             - partial_postcode
