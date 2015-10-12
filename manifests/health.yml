@@ -130,6 +130,12 @@ services:
         pk_name: organisation_code
         index: partial_postcode, name
         unique_fields: organisation_code
+        filter_fields:
+          - county
+          - city
+        choice_fields:
+          - city
+          - county
       searchables:
         - name: partial_postcode
           description: Find dental practices using just a partial postcode (e.g. CH64, or L1)
