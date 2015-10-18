@@ -55,4 +55,17 @@ services:
           fields:
             - make
             - year
-
+    - name: naptan_ferry_ports
+      description: "National Public Transport Access Nodes (NaPTAN) - Ferry Ports"
+      documentation_url: ""
+      schema_url: ""
+      separator: comma
+      dataset: naptan
+      resource: e3d0c00c-abb7-4159-b512-5e3ac394780a
+      filename_in_zip: FerryReferences.csv
+      encoding: windows-1252
+      table_settings:
+        pk_name: AtcoCode
+        index: road
+        unique_fields: AtcoCode, FerryCode
+        choice_fields:
