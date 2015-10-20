@@ -32,7 +32,8 @@ class PlannedRoadWorksExtractor(lib.Extractor):
 
         print "  Fetching resources from {}".format(service_manifest.dataset)
         ckan = ckanapi.RemoteCKAN('http://data.gov.uk',
-            user_agent='dgu_api_etl/0.1 (+http://data.gov.uk)')
+            user_agent='dgu_api_etl/0.1 (+http://data.gov.uk)',
+            get_only=True)
         count = 0
         package = ckan.action.package_show(id=service_manifest.dataset)
         for resource in package['resources']:
