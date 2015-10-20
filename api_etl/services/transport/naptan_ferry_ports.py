@@ -51,6 +51,8 @@ class FerryLoader(lib.loader.PostgresLoader):
 
         cur = self.conn.cursor()
 
+        cur.executemany(q, new_rows)
+
         q = u"""UPDATE
                     naptan_ferry_ports
                 SET
