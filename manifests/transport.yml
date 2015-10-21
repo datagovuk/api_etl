@@ -19,7 +19,8 @@ services:
           description: Find planned and historical roadworks by road (e.g. M1)
           query: select * from  planned_road_works where LOWER(road) = LOWER($1)
           fields:
-            - road
+            - name: road
+              type: string
     - name: anonymised_mot_test
       description: "Anonymised MOT results"
       documentation_url: ""
@@ -53,8 +54,10 @@ services:
           description: Find tests by year for a specific make of car
           query: select * from anonymised_mot_test where make = UPPER($1) AND date_part('year', testdate)::text = $2 limit 500;
           fields:
-            - make
-            - year
+            - name: make
+              type: string
+            - name: year
+              type: string
     - name: naptan_ferry_ports
       description: "National Public Transport Access Nodes (NaPTAN) - Ferry Ports"
       documentation_url: ""
@@ -72,8 +75,10 @@ services:
       searchables:
         - name: nearest
           description: Find ferry ports closest to a Lat Long point
-          query: select * from naptan_ferry_ports order by ST_Distance(LatLong, ST_MakePoint($2::float, $1::float));
+          query: select * from naptan_ferry_ports order by ST_Distance(LatLong, ST_MakePoint($2, $1));
           #query: select * from naptan_ferry_ports order by ST_Distance(LatLong, ST_GeomFromText($1, 4326));
           fields:
-            - lat
-            - lon
+            - name: lat
+              type: float
+            - name: lon
+              type: float
