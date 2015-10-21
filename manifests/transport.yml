@@ -69,3 +69,11 @@ services:
         index: road
         unique_fields: AtcoCode, FerryCode
         choice_fields:
+      searchables:
+        - name: nearest
+          description: Find ferry ports closest to a Lat Long point
+          query: select * from naptan_ferry_ports order by ST_Distance(LatLong, ST_MakePoint($2::float, $1::float));
+          #query: select * from naptan_ferry_ports order by ST_Distance(LatLong, ST_GeomFromText($1, 4326));
+          fields:
+            - lat
+            - lon
