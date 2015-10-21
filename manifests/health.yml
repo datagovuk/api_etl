@@ -25,7 +25,8 @@ services:
           description: Find hospitals using just a partial postcode  (e.g. CH64, or L1)
           query: select * from hospitals where LOWER(partial_postcode) = LOWER($1)
           fields:
-            - partial_postcode
+            - name: partial_postcode
+              type: string
         - name: organisation_name
           description: Find hospitals by name
           query: select * from hospitals where LOWER(organisation_name) ILIKE '%' || LOWER($1) || '%'
