@@ -76,9 +76,20 @@ services:
         - name: nearest
           description: Find ferry ports closest to a lat/lon point
           query: select * from naptan_ferry_ports order by ST_Distance(LatLong, ST_SetSRID(ST_MakePoint($1, $2), 4326));
-          #query: select * from naptan_ferry_ports order by ST_Distance(LatLong, ST_GeomFromText($1, 4326));
           fields:
             - name: lat
               type: float
             - name: lon
+              type: float
+        - name: extent
+          description: Find ferry ports within a region
+          query: select * from naptan_ferry_ports where LatLong && ST_MakeEnvelope($1, $2, $3, $4, 4326);
+          fields:
+            - name: top-left-lat
+              type: float
+            - name: top-left-lon
+              type: float
+            - name: bottom-right-lat
+              type: float
+            - name: bottom-right-lon
               type: float
