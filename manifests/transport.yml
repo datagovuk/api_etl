@@ -75,7 +75,7 @@ services:
       searchables:
         - name: nearest
           description: Find ferry ports closest to a Lat Long point
-          query: select * from naptan_ferry_ports order by ST_Distance(LatLong, ST_MakePoint($2, $1));
+          query: select * from naptan_ferry_ports order by ST_Distance(LatLong, ST_SetSRID(ST_MakePoint($1, $2), 4326));
           #query: select * from naptan_ferry_ports order by ST_Distance(LatLong, ST_GeomFromText($1, 4326));
           fields:
             - name: lat
