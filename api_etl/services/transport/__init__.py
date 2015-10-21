@@ -1,6 +1,7 @@
 
 import planned_road_works as r
 import mot as m
+import naptan_ferry_ports as nfp
 import api_etl.lib.extractor as e
 import api_etl.lib.loader as l
 
@@ -18,6 +19,12 @@ def entrypoints():
         'extractor': m.MOTExtractor,
         'transformer': m.MOTTransformer,
         'loader': m.MOTLoader,
+    },
+    {
+        'name': 'naptan_ferry_ports',
+        'extractor': nfp.FerryExtractor,
+        'transformer': nfp.FerryTransformer,
+        'loader': nfp.FerryLoader,
     }]
 
 

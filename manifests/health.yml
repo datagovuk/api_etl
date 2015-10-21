@@ -25,12 +25,14 @@ services:
           description: Find hospitals using just a partial postcode  (e.g. CH64, or L1)
           query: select * from hospitals where LOWER(partial_postcode) = LOWER($1)
           fields:
-            - partial_postcode
+            - name: partial_postcode
+              type: string
         - name: organisation_name
           description: Find hospitals by name
           query: select * from hospitals where LOWER(organisation_name) ILIKE '%' || LOWER($1) || '%'
           fields:
-            - organisation_name
+            - name: organisation_name
+              type: string
     - name: clinics
       documentation_url: ""
       description: "Location of NHS Clinics"
@@ -54,12 +56,14 @@ services:
           description: Find clinics using just a partial postcode (e.g. CH64, or L1)
           query: select * from clinics where LOWER(partial_postcode) = LOWER($1)
           fields:
-            - partial_postcode
+            - name: partial_postcode
+              type: string
         - name: organisation_name
           description: Find clinics by name
           query: select * from clinics where LOWER(organisation_name) LIKE '%' || LOWER($1) || '%';
           fields:
-            - organisation_name
+            - name: organisation_name
+              type: string
     - name: gp_surgeries
       documentation_url: ""
       description: "GP Surgeries"
@@ -83,12 +87,14 @@ services:
           description: Find surgeries using just a partial postcode (e.g. CH64, or L1)
           query: select * from gp_surgeries where LOWER(partial_postcode) = LOWER($1)
           fields:
-            - partial
+            - name: partial
+              type: string
         - name: organisation_name
           description: Find surgeries by name
           query: select * from gp_surgeries where LOWER(organisation_name) LIKE '%' || LOWER($1) || '%'
           fields:
-            - organisation_name
+            - name: organisation_name
+              type: string
     - name: social_care_locations
       documentation_url: ""
       description: "Social Care service locations"
@@ -112,12 +118,14 @@ services:
           description: Find locations using just a partial postcode (e.g. CH64, or L1)
           query: select * from social_care_locations where LOWER(partial_postcode) = LOWER($1)
           fields:
-            - partial_postcode
+            - name: partial_postcode
+              type: string
         - name: organisation_name
           description: Find locations by name
           query: select * from social_care_locations where LOWER(organisation_name) LIKE '%' || LOWER($1) || '%'
           fields:
-            - organisation_name
+            - name: organisation_name
+              type: string
     - name: dental_practices
       description: "Location of General Dental Practices"
       documentation_url: ""
@@ -135,12 +143,14 @@ services:
           description: Find dental practices using just a partial postcode (e.g. CH64, or L1)
           query: select * from dental_practices where LOWER(partial_postcode) = LOWER($1)
           fields:
-            - partial_postcode
+            - name: partial_postcode
+              type: string
         - name: name
           description: Find hospitals by name
           query: select * from dental_practices where LOWER(name) ILIKE '%' || LOWER($1) || '%'
           fields:
-            - name
+            - name: name
+              type: string
     - name: pharmacies
       description: "Information about pharmacies"
       documentation_url: ""
@@ -164,12 +174,14 @@ services:
           description: Find pharmacies using just a partial postcode  (e.g. CH64, or L1)
           query: select * from pharmacies where LOWER(partial_postcode) = LOWER($1)
           fields:
-            - partial_postcode
+            - name: partial_postcode
+              type: string
         - name: name
           description: Find pharmacies by name
           query: select * from pharmacies where LOWER(organisation_name) ILIKE '%' || LOWER($1) || '%'
           fields:
-            - organisation_name
+            - name: organisation_name
+              type: string
 
 
 

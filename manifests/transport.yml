@@ -19,7 +19,8 @@ services:
           description: Find planned and historical roadworks by road (e.g. M1)
           query: select * from  planned_road_works where LOWER(road) = LOWER($1)
           fields:
-            - road
+            - name: road
+              type: string
     - name: anonymised_mot_test
       description: "Anonymised MOT results"
       documentation_url: ""
@@ -53,6 +54,42 @@ services:
           description: Find tests by year for a specific make of car
           query: select * from anonymised_mot_test where make = UPPER($1) AND date_part('year', testdate)::text = $2 limit 500;
           fields:
-            - make
-            - year
-
+            - name: make
+              type: string
+            - name: year
+              type: string
+    - name: naptan_ferry_ports
+      description: "National Public Transport Access Nodes (NaPTAN) - Ferry Ports"
+      documentation_url: ""
+      schema_url: ""
+      separator: comma
+      dataset: naptan
+      resource: e3d0c00c-abb7-4159-b512-5e3ac394780a
+      filename_in_zip: FerryReferences.csv
+      encoding: windows-1252
+      table_settings:
+        pk_name: AtcoCode
+        index: road
+        unique_fields: AtcoCode, FerryCode
+        choice_fields:
+      searchables:
+        - name: nearest
+          description: Find ferry ports closest to a lat/lon point
+          query: select * from naptan_ferry_ports order by ST_Distance(LatLong, ST_SetSRID(ST_MakePoint($1, $2), 4326));
+          fields:
+            - name: lat
+              type: float
+            - name: lon
+              type: float
+        - name: extent
+          description: Find ferry ports within a region
+          query: select * from naptan_ferry_ports where LatLong && ST_MakeEnvelope($1, $2, $3, $4, 4326);
+          fields:
+            - name: top-left-lat
+              type: float
+            - name: top-left-lon
+              type: float
+            - name: bottom-right-lat
+              type: float
+            - name: bottom-right-lon
+              type: float
