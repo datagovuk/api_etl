@@ -72,3 +72,37 @@ services:
         - name: all
           description: Show all airports
           query: select * from naptan_airport;
+    - name: naptan_coach_stations
+      description: "National Public Transport Access Nodes (NaPTAN) - Coach Stations"
+      documentation_url: ""
+      schema_url: ""
+      separator: comma
+      dataset: naptan
+      resource: e3d0c00c-abb7-4159-b512-5e3ac394780a
+      filename_in_zip: CoachReferences.csv
+      encoding: windows-1252
+      table_settings:
+        pk_name: AtcoCode
+        unique_fields: AtcoCode, NationalCoachCode
+        choice_fields:
+      searchables:
+        - name: nearest
+          description: Find coach stations closest to a lat/lon point
+          query: select * from naptan_coach_stations order by ST_Distance(LatLong, ST_SetSRID(ST_MakePoint($1, $2), 4326));
+          fields:
+            - name: lat
+              type: float
+            - name: lon
+              type: float
+        - name: extent
+          description: Find coach stations within a region
+          query: select * from naptan_coach_stations where LatLong && ST_MakeEnvelope($1, $2, $3, $4, 4326);
+          fields:
+            - name: top-left-lat
+              type: float
+            - name: top-left-lon
+              type: float
+            - name: bottom-right-lat
+              type: float
+            - name: bottom-right-lon
+              type: float
