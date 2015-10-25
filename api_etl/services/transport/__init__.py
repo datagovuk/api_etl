@@ -6,6 +6,7 @@ import mot as m
 import naptan_ferry_ports as nfp
 import naptan_airports as nap
 import naptan_coach_stations as ncs
+import naptan_railway_stations as nrs
 import api_etl.lib.extractor as e
 import api_etl.lib.loader as l
 
@@ -41,6 +42,12 @@ def entrypoints():
         'extractor': CKANZipExtractor,
         'transformer': Transformer,
         'loader': ncs.CoachLoader,
+    },
+    {
+        'name': 'naptan_railway_stations',
+        'extractor': CKANZipExtractor,
+        'transformer': Transformer,
+        'loader': nrs.RailLoader,
     }]
 
 

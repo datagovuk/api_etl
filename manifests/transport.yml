@@ -56,7 +56,7 @@ services:
             - name: bottom-right-lon
               type: float
     - name: naptan_airports
-      description: "National Public Transport Access Nodes (NaPTAN) - Ferry Airports"
+      description: "National Public Transport Access Nodes (NaPTAN) - Airports"
       documentation_url: ""
       schema_url: ""
       separator: comma
@@ -97,6 +97,40 @@ services:
         - name: extent
           description: Find coach stations within a region
           query: select * from naptan_coach_stations where LatLong && ST_MakeEnvelope($1, $2, $3, $4, 4326);
+          fields:
+            - name: top-left-lat
+              type: float
+            - name: top-left-lon
+              type: float
+            - name: bottom-right-lat
+              type: float
+            - name: bottom-right-lon
+              type: float
+    - name: naptan_railway_stations
+      description: "National Public Transport Access Nodes (NaPTAN) - Railway Stations"
+      documentation_url: ""
+      schema_url: ""
+      separator: comma
+      dataset: naptan
+      resource: e3d0c00c-abb7-4159-b512-5e3ac394780a
+      filename_in_zip: RailReferences.csv
+      encoding: windows-1252
+      table_settings:
+        pk_name: AtcoCode
+        unique_fields: AtcoCode, TiplocCode, CrsCode
+        choice_fields:
+      searchables:
+        - name: nearest
+          description: Find railway stations closest to a lat/lon point
+          query: select * from naptan_railway_stations order by ST_Distance(LatLong, ST_SetSRID(ST_MakePoint($1, $2), 4326));
+          fields:
+            - name: lat
+              type: float
+            - name: lon
+              type: float
+        - name: extent
+          description: Find railway stations within a region
+          query: select * from naptan_railway_stations where LatLong && ST_MakeEnvelope($1, $2, $3, $4, 4326);
           fields:
             - name: top-left-lat
               type: float
