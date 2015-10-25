@@ -32,7 +32,6 @@ services:
       encoding: windows-1252
       table_settings:
         pk_name: AtcoCode
-        index: road
         unique_fields: AtcoCode, FerryCode
         choice_fields:
       searchables:
@@ -56,3 +55,20 @@ services:
               type: float
             - name: bottom-right-lon
               type: float
+    - name: naptan_airports
+      description: "National Public Transport Access Nodes (NaPTAN) - Ferry Airports"
+      documentation_url: ""
+      schema_url: ""
+      separator: comma
+      dataset: naptan
+      resource: e3d0c00c-abb7-4159-b512-5e3ac394780a
+      filename_in_zip: AirReferences.csv
+      encoding: windows-1252
+      table_settings:
+        pk_name: AtcoCode
+        unique_fields: AtcoCode, IataCode
+        choice_fields:
+      searchables:
+        - name: all
+          description: Show all airports
+          query: select * from naptan_airport;
