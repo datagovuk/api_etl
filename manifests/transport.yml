@@ -71,7 +71,7 @@ services:
       searchables:
         - name: all
           description: Show all airports
-          query: select * from naptan_airport;
+          query: select * from naptan_airports;
     - name: naptan_coach_stations
       description: "National Public Transport Access Nodes (NaPTAN) - Coach Stations"
       documentation_url: ""
