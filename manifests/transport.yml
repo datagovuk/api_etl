@@ -21,43 +21,6 @@ services:
           fields:
             - name: road
               type: string
-    - name: anonymised_mot_test
-      description: "Anonymised MOT results"
-      documentation_url: ""
-      schema_url: ""
-      separator: pipe
-      large_dataset: true
-      encoding: ascii
-      dataset: anonymised_mot_test
-      table_settings:
-        pk_name: testid
-        index: make, model, testresult, year
-        unique_fields: testid
-        filter_fields:
-          - make
-          - postcoderegion
-          - testclassid
-          - fueltype
-          - testresult
-          - colour
-          - year
-        choice_fields:
-          - make
-          - postcoderegion
-          - testclassid
-          - fueltype
-          - testresult
-          - colour
-          - year
-      searchables:
-        - name: year_and_make
-          description: Find tests by year for a specific make of car
-          query: select * from anonymised_mot_test where make = UPPER($1) AND date_part('year', testdate)::text = $2 limit 500;
-          fields:
-            - name: make
-              type: string
-            - name: year
-              type: string
     - name: naptan_ferry_ports
       description: "National Public Transport Access Nodes (NaPTAN) - Ferry Ports"
       documentation_url: ""
