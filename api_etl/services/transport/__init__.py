@@ -14,12 +14,12 @@ def entrypoints():
         'transformer': r.PlannedRoadWorksTransformer,
         'loader': r.PlannedRoadWordsLoader,
     },
-    {
-        'name': 'anonymised_mot_test',
-        'extractor': m.MOTExtractor,
-        'transformer': m.MOTTransformer,
-        'loader': m.MOTLoader,
-    },
+    #{
+    #    'name': 'anonymised_mot_test',
+    #    'extractor': m.MOTExtractor,
+    #    'transformer': m.MOTTransformer,
+    #    'loader': m.MOTLoader,
+    #},
     {
         'name': 'naptan_ferry_ports',
         'extractor': nfp.FerryExtractor,
