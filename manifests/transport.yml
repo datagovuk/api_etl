@@ -56,6 +56,14 @@ services:
               type: float
             - name: bottom-right-lon
               type: float
+        - name: postcode
+          description: Find ferry ports near to a postcode
+          query: select * from naptan_ferry_ports where ST_DISTANCE((select latlong from codepoint where postcode = normalise_postcode($1)), latlong) < $2;
+          fields:
+            - name: postcode
+              type: string
+            - name: distance
+              type: integer
     - name: naptan_airports
       description: "National Public Transport Access Nodes (NaPTAN) - Airports"
       documentation_url: ""
@@ -108,6 +116,14 @@ services:
               type: float
             - name: bottom-right-lon
               type: float
+        - name: postcode
+          description: Find ferry ports near to a postcode
+          query: select * from naptan_coach_stations where ST_DISTANCE((select latlong from codepoint where postcode = normalise_postcode($1)), latlong) < $2;
+          fields:
+            - name: postcode
+              type: string
+            - name: distance
+              type: integer
     - name: naptan_railway_stations
       description: "National Public Transport Access Nodes (NaPTAN) - Railway Stations"
       documentation_url: ""
@@ -143,3 +159,11 @@ services:
               type: float
             - name: bottom-right-lon
               type: float
+        - name: postcode
+          description: Find ferry ports near to a postcode
+          query: select * from naptan_railway_stations where ST_DISTANCE((select latlong from codepoint where postcode = normalise_postcode($1)), latlong) < $2;
+          fields:
+            - name: postcode
+              type: string
+            - name: distance
+              type: integer
