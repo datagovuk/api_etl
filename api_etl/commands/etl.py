@@ -15,8 +15,9 @@ class DbCommand(cmd.Cmd):
             "createuser -S -D -R -P -l reader",
         ]
         print ';\n'.join(accs) + ";"
+        self.create_db("apiserver")
 
-    def do_init(self, args):
+    def create_db(self, name):
         """ Create the database for the '''args''' theme """
         from api_etl import Config
 
@@ -34,7 +35,7 @@ class DbCommand(cmd.Cmd):
             'psql {db} -c "ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT ON SEQUENCES TO {role}"',
             'psql {db} -c "REVOKE CREATE ON SCHEMA public FROM public"'
         ]
-        print ';\n'.join(cmds).format(db=args, role=role, owner=owner) + ";"
+        print ';\n'.join(cmds).format(db=name, role=role, owner=owner) + ";"
 
 
 class ServiceCommand(cmd.Cmd):
@@ -101,7 +102,7 @@ class ServiceCommand(cmd.Cmd):
             print "\nLoading data"
             self.print_separator()
 
-            loader.init_connection(theme)
+            loader.init_connection("apiserver")
             if not loader.table_exists(service_manifest):
                 loader.create_table(service_manifest, transformed_filepath)
             else:
