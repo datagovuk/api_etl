@@ -112,7 +112,7 @@ class PostgresLoader(Loader):
 
         where_clauses = []
         for key in pk:
-             where_clauses.append("{col} = '{val}'".format(col=key, val=row[key]))
+             where_clauses.append(u"{col} = '{val}'".format(col=key, val=row[key]))
 
         query += " AND ".join(where_clauses)
 
