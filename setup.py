@@ -32,6 +32,7 @@ config = {
             'transport = api_etl.services.transport:entrypoints',
             'companies = api_etl.services.companies:entrypoints',
             'environment = api_etl.services.environment:entrypoints',
+            'internal = api_etl.services.internal:entrypoints',
         ]
     }
 }

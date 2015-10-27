@@ -1,0 +1,13 @@
+title: Internal
+description: Internal APIs
+documentation_url: ""
+services:
+    - name: codepoint
+      description: "Codepoint Postcode data"
+      documentation_url: ""
+      schema_url: ""
+      separator: tab
+      encoding: utf8
+      source_url: http://parlvid.mysociety.org/os/codepo_gb-2015-05.zip
+      table_settings:
+        pk_name: Postcode

@@ -81,9 +81,10 @@ class ServiceCommand(cmd.Cmd):
         print "  Extracted content at {}".format(extracted_filepath)
 
         # Transform
-        transformer = entry_points['transformer']
+        transformer = entry_points.get('transformer')
         if not transformer:
             print "No transformer"
+            transformed_filepath = extracted_filepath
         else:
             print "\nTransforming data"
             self.print_separator()
