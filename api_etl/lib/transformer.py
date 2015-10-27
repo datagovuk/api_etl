@@ -62,7 +62,7 @@ class Transformer(object):
                         else 'PREVIOUS ONE: ' + repr(row)
                     print 'Exception occurred processing data row %s: %s' % \
                         (row_count + 1, row_repr)
-                    raise
+
         return row_count
 
     def new_header_rows(self, headers):
