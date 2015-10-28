@@ -140,6 +140,10 @@ class CodepointLoader(lib.loader.PostgresLoader):
     def _create_sql(self, service_manifest):
         enable_postgis = "CREATE EXTENSION IF NOT EXISTS postgis;"
 
+        f = """create function normalise_postcode(pc varchar) returns varchar as $$
+                        SELECT upper(replace(pc, ' ', ''));
+                 $$ LANGUAGE SQL;"""
+
         create = """CREATE TABLE codepoint (
             Postcode varchar(12) primary key,
             OSPoint geometry(POINT, 27700),
