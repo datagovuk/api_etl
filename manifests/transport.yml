@@ -167,3 +167,46 @@ services:
               type: string
             - name: distance
               type: integer
+    - name: naptan_bus_stops
+      description: "National Public Transport Access Nodes (NaPTAN) - But Stops"
+      documentation_url: ""
+      schema_url: ""
+      has_geo_data: true,
+      separator: comma
+      dataset: naptan
+      resource: e3d0c00c-abb7-4159-b512-5e3ac394780a
+      filename_in_zip: Stops.csv
+      encoding: windows-1252
+      table_settings:
+        pk_name: AtcoCode
+        unique_fields: AtcoCode
+        choice_fields:
+      searchables:
+        - name: nearest
+          description: Find bus stops closest to a lat/lon point
+          query: select * from naptan_bus_stops order by ST_Distance(LatLong, ST_SetSRID(ST_MakePoint($1, $2), 4326));
+          fields:
+            - name: lat
+              type: float
+            - name: lon
+              type: float
+        - name: extent
+          description: Find bus stops within a region
+          query: select * from naptan_bus_stops where LatLong && ST_MakeEnvelope($1, $2, $3, $4, 4326);
+          fields:
+            - name: top-left-lat
+              type: float
+            - name: top-left-lon
+              type: float
+            - name: bottom-right-lat
+              type: float
+            - name: bottom-right-lon
+              type: float
+        - name: postcode
+          description: Find bus stops near to a postcode
+          query: select * from naptan_bus_stops where ST_DISTANCE((select latlong from codepoint where postcode = normalise_postcode($1)), latlong) < $2;
+          fields:
+            - name: postcode
+              type: string
+            - name: distance
+              type: integer
