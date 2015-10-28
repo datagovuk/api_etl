@@ -1,7 +1,12 @@
 
+from api_etl.lib.extractor import CKANZipExtractor
+from api_etl.lib import Transformer
 import planned_road_works as r
 import mot as m
 import naptan_ferry_ports as nfp
+import naptan_airports as nap
+import naptan_coach_stations as ncs
+import naptan_railway_stations as nrs
 import api_etl.lib.extractor as e
 import api_etl.lib.loader as l
 
@@ -22,10 +27,27 @@ def entrypoints():
     #},
     {
         'name': 'naptan_ferry_ports',
-        'extractor': nfp.FerryExtractor,
-        'transformer': nfp.FerryTransformer,
+        'extractor': CKANZipExtractor,
+        'transformer': Transformer,
         'loader': nfp.FerryLoader,
+    },
+    {
+        'name': 'naptan_airports',
+        'extractor': CKANZipExtractor,
+        'transformer': Transformer,
+        'loader': nap.AirportLoader,
+    },
+    {
+        'name': 'naptan_coach_stations',
+        'extractor': CKANZipExtractor,
+        'transformer': Transformer,
+        'loader': ncs.CoachLoader,
+    },
+    {
+        'name': 'naptan_railway_stations',
+        'extractor': CKANZipExtractor,
+        'transformer': Transformer,
+        'loader': nrs.RailLoader,
     }]
-
 
 

@@ -25,6 +25,7 @@ services:
       description: "National Public Transport Access Nodes (NaPTAN) - Ferry Ports"
       documentation_url: ""
       schema_url: ""
+      has_geo_data: true,
       separator: comma
       dataset: naptan
       resource: e3d0c00c-abb7-4159-b512-5e3ac394780a
@@ -32,7 +33,6 @@ services:
       encoding: windows-1252
       table_settings:
         pk_name: AtcoCode
-        index: road
         unique_fields: AtcoCode, FerryCode
         choice_fields:
       searchables:
@@ -56,3 +56,114 @@ services:
               type: float
             - name: bottom-right-lon
               type: float
+        - name: postcode
+          description: Find ferry ports near to a postcode
+          query: select * from naptan_ferry_ports where ST_DISTANCE((select latlong from codepoint where postcode = normalise_postcode($1)), latlong) < $2;
+          fields:
+            - name: postcode
+              type: string
+            - name: distance
+              type: integer
+    - name: naptan_airports
+      description: "National Public Transport Access Nodes (NaPTAN) - Airports"
+      documentation_url: ""
+      schema_url: ""
+      separator: comma
+      dataset: naptan
+      resource: e3d0c00c-abb7-4159-b512-5e3ac394780a
+      filename_in_zip: AirReferences.csv
+      encoding: windows-1252
+      table_settings:
+        pk_name: AtcoCode
+        unique_fields: AtcoCode, IataCode
+        choice_fields:
+      searchables:
+        - name: all
+          description: Show all airports
+          query: select * from naptan_airports;
+    - name: naptan_coach_stations
+      description: "National Public Transport Access Nodes (NaPTAN) - Coach Stations"
+      documentation_url: ""
+      schema_url: ""
+      has_geo_data: true,
+      separator: comma
+      dataset: naptan
+      resource: e3d0c00c-abb7-4159-b512-5e3ac394780a
+      filename_in_zip: CoachReferences.csv
+      encoding: windows-1252
+      table_settings:
+        pk_name: AtcoCode
+        unique_fields: AtcoCode, NationalCoachCode
+        choice_fields:
+      searchables:
+        - name: nearest
+          description: Find coach stations closest to a lat/lon point
+          query: select * from naptan_coach_stations order by ST_Distance(LatLong, ST_SetSRID(ST_MakePoint($1, $2), 4326));
+          fields:
+            - name: lat
+              type: float
+            - name: lon
+              type: float
+        - name: extent
+          description: Find coach stations within a region
+          query: select * from naptan_coach_stations where LatLong && ST_MakeEnvelope($1, $2, $3, $4, 4326);
+          fields:
+            - name: top-left-lat
+              type: float
+            - name: top-left-lon
+              type: float
+            - name: bottom-right-lat
+              type: float
+            - name: bottom-right-lon
+              type: float
+        - name: postcode
+          description: Find ferry ports near to a postcode
+          query: select * from naptan_coach_stations where ST_DISTANCE((select latlong from codepoint where postcode = normalise_postcode($1)), latlong) < $2;
+          fields:
+            - name: postcode
+              type: string
+            - name: distance
+              type: integer
+    - name: naptan_railway_stations
+      description: "National Public Transport Access Nodes (NaPTAN) - Railway Stations"
+      documentation_url: ""
+      schema_url: ""
+      has_geo_data: true,
+      separator: comma
+      dataset: naptan
+      resource: e3d0c00c-abb7-4159-b512-5e3ac394780a
+      filename_in_zip: RailReferences.csv
+      encoding: windows-1252
+      table_settings:
+        pk_name: AtcoCode
+        unique_fields: AtcoCode, TiplocCode, CrsCode
+        choice_fields:
+      searchables:
+        - name: nearest
+          description: Find railway stations closest to a lat/lon point
+          query: select * from naptan_railway_stations order by ST_Distance(LatLong, ST_SetSRID(ST_MakePoint($1, $2), 4326));
+          fields:
+            - name: lat
+              type: float
+            - name: lon
+              type: float
+        - name: extent
+          description: Find railway stations within a region
+          query: select * from naptan_railway_stations where LatLong && ST_MakeEnvelope($1, $2, $3, $4, 4326);
+          fields:
+            - name: top-left-lat
+              type: float
+            - name: top-left-lon
+              type: float
+            - name: bottom-right-lat
+              type: float
+            - name: bottom-right-lon
+              type: float
+        - name: postcode
+          description: Find ferry ports near to a postcode
+          query: select * from naptan_railway_stations where ST_DISTANCE((select latlong from codepoint where postcode = normalise_postcode($1)), latlong) < $2;
+          fields:
+            - name: postcode
+              type: string
+            - name: distance
+              type: integer
