@@ -1,0 +1,128 @@
+{
+  "title": "Social Care service locations", 
+  "fields": [
+    {
+      "type": "string", 
+      "name": "city"
+    }, 
+    {
+      "type": "string", 
+      "name": "parent_name"
+    }, 
+    {
+      "type": "string", 
+      "name": "latitude"
+    }, 
+    {
+      "type": "string", 
+      "name": "organisation_id"
+    }, 
+    {
+      "type": "string", 
+      "name": "email"
+    }, 
+    {
+      "type": "string", 
+      "name": "website"
+    }, 
+    {
+      "type": "string", 
+      "name": "fax"
+    }, 
+    {
+      "type": "string", 
+      "name": "organisation_name"
+    }, 
+    {
+      "type": "string", 
+      "name": "organisation_code"
+    }, 
+    {
+      "type": "string", 
+      "name": "organisation_type"
+    }, 
+    {
+      "type": "string", 
+      "name": "sub_type"
+    }, 
+    {
+      "type": "string", 
+      "name": "address1"
+    }, 
+    {
+      "type": "string", 
+      "name": "address2"
+    }, 
+    {
+      "type": "string", 
+      "name": "address3"
+    }, 
+    {
+      "type": "string", 
+      "name": "local_authority"
+    }, 
+    {
+      "type": "string", 
+      "name": "phone"
+    }, 
+    {
+      "type": "string", 
+      "name": "organisation_status"
+    }, 
+    {
+      "type": "string", 
+      "name": "postcode"
+    }, 
+    {
+      "type": "string", 
+      "name": "longitude"
+    }, 
+    {
+      "type": "string", 
+      "name": "county"
+    }, 
+    {
+      "type": "string", 
+      "name": "parent_o_d_s_code"
+    }, 
+    {
+      "type": "string", 
+      "name": "is_pims_managed"
+    }, 
+    {
+      "type": "string", 
+      "name": "partial_postcode"
+    }
+  ], 
+  "tablename": "social_care_locations", 
+  "theme": "health", 
+  "queries": [
+    {
+      "query": "select * from social_care_locations where LOWER(partial_postcode) = LOWER($1)", 
+      "description": "Find locations using just a partial postcode (e.g. CH64, or L1)", 
+      "name": "partial_postcode", 
+      "fields": [
+        {
+          "type": "string", 
+          "name": "partial_postcode"
+        }
+      ]
+    }, 
+    {
+      "query": "select * from social_care_locations where LOWER(organisation_name) LIKE '%' || LOWER($1) || '%'", 
+      "description": "Find locations by name", 
+      "name": "organisation_name", 
+      "fields": [
+        {
+          "type": "string", 
+          "name": "organisation_name"
+        }
+      ]
+    }
+  ], 
+  "id": "social_care_locations", 
+  "choice_fields": [
+    "city", 
+    "county"
+  ]
+}

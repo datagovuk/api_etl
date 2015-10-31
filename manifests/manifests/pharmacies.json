@@ -1,0 +1,35 @@
+{
+  "title": "Information about pharmacies", 
+  "fields": [], 
+  "tablename": "pharmacies", 
+  "theme": "health", 
+  "queries": [
+    {
+      "query": "select * from pharmacies where LOWER(partial_postcode) = LOWER($1)", 
+      "description": "Find pharmacies using just a partial postcode  (e.g. CH64, or L1)", 
+      "name": "partial_postcode", 
+      "fields": [
+        {
+          "type": "string", 
+          "name": "partial_postcode"
+        }
+      ]
+    }, 
+    {
+      "query": "select * from pharmacies where LOWER(organisation_name) ILIKE '%' || LOWER($1) || '%'", 
+      "description": "Find pharmacies by name", 
+      "name": "name", 
+      "fields": [
+        {
+          "type": "string", 
+          "name": "organisation_name"
+        }
+      ]
+    }
+  ], 
+  "id": "pharmacies", 
+  "choice_fields": [
+    "city", 
+    "county"
+  ]
+}

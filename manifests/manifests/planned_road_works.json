@@ -1,0 +1,78 @@
+{
+  "title": "Information on planned roadworks carried out on the Highways Agency network", 
+  "fields": [
+    {
+      "type": "string", 
+      "name": "reference_number"
+    }, 
+    {
+      "type": "string", 
+      "name": "road"
+    }, 
+    {
+      "type": "string", 
+      "name": "local_authority"
+    }, 
+    {
+      "type": "string", 
+      "name": "location"
+    }, 
+    {
+      "type": "timestamp without time zone", 
+      "name": "start_date"
+    }, 
+    {
+      "type": "timestamp without time zone", 
+      "name": "end_date"
+    }, 
+    {
+      "type": "string", 
+      "name": "expected_delay"
+    }, 
+    {
+      "type": "string", 
+      "name": "description"
+    }, 
+    {
+      "type": "string", 
+      "name": "traffic_management"
+    }, 
+    {
+      "type": "string", 
+      "name": "closure_type"
+    }, 
+    {
+      "type": "string", 
+      "name": "centre_easting"
+    }, 
+    {
+      "type": "string", 
+      "name": "centre_northing"
+    }, 
+    {
+      "type": "string", 
+      "name": "status"
+    }, 
+    {
+      "type": "timestamp without time zone", 
+      "name": "published_date"
+    }
+  ], 
+  "tablename": "planned_road_works", 
+  "theme": "transport", 
+  "queries": [
+    {
+      "query": "select * from  planned_road_works where LOWER(road) = LOWER($1)", 
+      "description": "Find planned and historical roadworks by road (e.g. M1)", 
+      "name": "road", 
+      "fields": [
+        {
+          "type": "string", 
+          "name": "road"
+        }
+      ]
+    }
+  ], 
+  "id": "planned_road_works", 
+  "choice_fields": null
+}

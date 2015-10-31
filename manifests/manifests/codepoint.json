@@ -1,0 +1,29 @@
+{
+  "title": "Codepoint Postcode data", 
+  "fields": [
+    {
+      "type": "string", 
+      "name": "postcode"
+    }, 
+    {
+      "type": "USER-DEFINED", 
+      "name": "ospoint"
+    }, 
+    {
+      "type": "USER-DEFINED", 
+      "name": "latlong"
+    }, 
+    {
+      "type": "string", 
+      "name": "district"
+    }, 
+    {
+      "type": "string", 
+      "name": "ward"
+    }
+  ], 
+  "tablename": "codepoint", 
+  "theme": "internal", 
+  "id": "codepoint", 
+  "choice_fields": []
+}

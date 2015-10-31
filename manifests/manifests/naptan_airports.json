@@ -1,0 +1,28 @@
+{
+  "title": "National Public Transport Access Nodes (NaPTAN) - Airports", 
+  "fields": [
+    {
+      "type": "string", 
+      "name": "atcocode"
+    }, 
+    {
+      "type": "string", 
+      "name": "iatacode"
+    }, 
+    {
+      "type": "string", 
+      "name": "name"
+    }
+  ], 
+  "tablename": "naptan_airports", 
+  "theme": "transport", 
+  "queries": [
+    {
+      "query": "select * from naptan_airports;", 
+      "name": "all", 
+      "description": "Show all airports"
+    }
+  ], 
+  "id": "naptan_airports", 
+  "choice_fields": null
+}

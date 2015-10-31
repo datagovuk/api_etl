@@ -1,0 +1,133 @@
+{
+  "title": "Location of NHS Hospitals", 
+  "fields": [
+    {
+      "type": "string", 
+      "name": "city"
+    }, 
+    {
+      "type": "string", 
+      "name": "parent_name"
+    }, 
+    {
+      "type": "string", 
+      "name": "latitude"
+    }, 
+    {
+      "type": "string", 
+      "name": "organisation_id"
+    }, 
+    {
+      "type": "string", 
+      "name": "email"
+    }, 
+    {
+      "type": "string", 
+      "name": "website"
+    }, 
+    {
+      "type": "string", 
+      "name": "fax"
+    }, 
+    {
+      "type": "string", 
+      "name": "organisation_name"
+    }, 
+    {
+      "type": "string", 
+      "name": "organisation_code"
+    }, 
+    {
+      "type": "string", 
+      "name": "organisation_type"
+    }, 
+    {
+      "type": "string", 
+      "name": "sub_type"
+    }, 
+    {
+      "type": "string", 
+      "name": "address1"
+    }, 
+    {
+      "type": "string", 
+      "name": "address2"
+    }, 
+    {
+      "type": "string", 
+      "name": "address3"
+    }, 
+    {
+      "type": "string", 
+      "name": "phone"
+    }, 
+    {
+      "type": "string", 
+      "name": "organisation_status"
+    }, 
+    {
+      "type": "string", 
+      "name": "postcode"
+    }, 
+    {
+      "type": "string", 
+      "name": "longitude"
+    }, 
+    {
+      "type": "string", 
+      "name": "sector"
+    }, 
+    {
+      "type": "string", 
+      "name": "county"
+    }, 
+    {
+      "type": "string", 
+      "name": "parent_o_d_s_code"
+    }, 
+    {
+      "type": "string", 
+      "name": "is_pims_managed"
+    }, 
+    {
+      "type": "string", 
+      "name": "partial_postcode"
+    }
+  ], 
+  "tablename": "hospitals", 
+  "theme": "health", 
+  "queries": [
+    {
+      "query": "select * from hospitals", 
+      "name": "all_hospitals", 
+      "description": "Show all hospital"
+    }, 
+    {
+      "query": "select * from hospitals where LOWER(partial_postcode) = LOWER($1)", 
+      "description": "Find hospitals using just a partial postcode  (e.g. CH64, or L1)", 
+      "name": "partial_postcode", 
+      "fields": [
+        {
+          "type": "string", 
+          "name": "partial_postcode"
+        }
+      ]
+    }, 
+    {
+      "query": "select * from hospitals where LOWER(organisation_name) ILIKE '%' || LOWER($1) || '%'", 
+      "description": "Find hospitals by name", 
+      "name": "organisation_name", 
+      "fields": [
+        {
+          "type": "string", 
+          "name": "organisation_name"
+        }
+      ]
+    }
+  ], 
+  "id": "hospitals", 
+  "choice_fields": [
+    "city", 
+    "county"
+  ]
+}

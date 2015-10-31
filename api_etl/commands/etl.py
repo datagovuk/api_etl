@@ -1,7 +1,9 @@
 import cmd
+import glob
+import json
 import os
 import sys
-
+import psycopg2
 import api_etl.lib.services as svcs
 from api_etl.lib.manifest import Manifest
 
@@ -120,10 +122,70 @@ class ServiceCommand(cmd.Cmd):
         pass
 
 
+class UtilCommand(cmd.Cmd):
+
+    def do_manifest_convert(self, args):
+        from api_etl import Config
+        self.config = Config()
+        owner = self.config.database('owner')
+        self.conn = psycopg2.connect("dbname=apiserver user={}".format(owner))
+
+        self.lookup = {
+            "character varying": "string",
+            "text": "string"
+        }
+
+        root = self.config.config.get('manifest', 'location')
+        for f in glob.glob(os.path.join(root, '*.yml')):
+            m = Manifest(f)
+            theme = m.data['title'].lower()
+
+            for service in m.get_services():
+                out = {
+                    "theme": theme,
+                    "id": service.name,
+                    "title": service.description,
+                    "tablename": service.name,
+                }
+
+                q = """
+                  SELECT column_name, data_type
+                  FROM information_schema.columns
+                  WHERE table_schema = 'public'
+                    AND table_name   = '{table}';
+                """.format(table=service.name)
+
+                cur = self.conn.cursor()
+                cur.execute(q)
+                result = cur.fetchall()
+                cur.close()
+
+                out['fields'] = []
+                for (n,t) in result:
+                    d = {"name": n, "type": self.lookup.get(t, t)}
+                    out['fields'].append(d)
+
+                if isinstance(service.table_settings, list):
+                    settings = service.table_settings[0]
+                else:
+                    settings = service.table_settings
+                out['choice_fields'] = settings.get('choice_fields', [])
+
+                if hasattr(service, "searchables"):
+                    out['queries'] = service.searchables
+
+                outfile = os.path.join(root, "manifests", service.name + ".json")
+                print outfile
+                with open(outfile, "w") as fout:
+                    json.dump(out, fout, indent=2)
+
+        self.conn.close()
+
 def main():
     commands = {
         'service': ServiceCommand,
-        'database': DbCommand
+        'database': DbCommand,
+        'util': UtilCommand
     }
 
     args = sys.argv[1:]
