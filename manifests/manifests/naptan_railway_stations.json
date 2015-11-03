@@ -70,7 +70,7 @@
     },
     {
       "query": "select * from naptan_railway_stations where ST_DISTANCE((select latlong from codepoint where postcode = normalise_postcode($1)), latlong) < $2;",
-      "description": "Find ferry ports near to a postcode",
+      "description": "Find railway stations near to a postcode",
       "name": "postcode",
       "fields": [
         {
