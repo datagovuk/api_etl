@@ -1,12 +1,7 @@
 {
   "title": "Information about pharmacies",
   "dataset": "https://data.gov.uk/dataset/pharmacies",
-  "fields": [
-    {
-      "type": "string",
-      "name": "atcocode"
-    },
-  ],
+  "fields": [],
   "tablename": "pharmacies",
   "theme": "health",
   "queries": [
