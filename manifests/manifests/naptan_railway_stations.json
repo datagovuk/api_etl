@@ -1,88 +1,89 @@
 {
-  "title": "National Public Transport Access Nodes (NaPTAN) - Railway Stations", 
+  "title": "National Public Transport Access Nodes (NaPTAN) - Railway Stations",
+   "geo": true,
   "fields": [
     {
-      "type": "string", 
+      "type": "string",
       "name": "atcocode"
-    }, 
+    },
     {
-      "type": "string", 
+      "type": "string",
       "name": "tiploccode"
-    }, 
+    },
     {
-      "type": "string", 
+      "type": "string",
       "name": "crscode"
-    }, 
+    },
     {
-      "type": "string", 
+      "type": "string",
       "name": "stationname"
-    }, 
+    },
     {
-      "type": "USER-DEFINED", 
+      "type": "USER-DEFINED",
       "name": "ospoint"
-    }, 
+    },
     {
-      "type": "USER-DEFINED", 
+      "type": "USER-DEFINED",
       "name": "latlong"
     }
-  ], 
-  "tablename": "naptan_railway_stations", 
-  "theme": "transport", 
+  ],
+  "tablename": "naptan_railway_stations",
+  "theme": "transport",
   "queries": [
     {
-      "query": "select * from naptan_railway_stations order by ST_Distance(LatLong, ST_SetSRID(ST_MakePoint($1, $2), 4326));", 
-      "description": "Find railway stations closest to a lat/lon point", 
-      "name": "nearest", 
+      "query": "select * from naptan_railway_stations order by ST_Distance(LatLong, ST_SetSRID(ST_MakePoint($1, $2), 4326));",
+      "description": "Find railway stations closest to a lat/lon point",
+      "name": "nearest",
       "fields": [
         {
-          "type": "float", 
+          "type": "float",
           "name": "lat"
-        }, 
+        },
         {
-          "type": "float", 
+          "type": "float",
           "name": "lon"
         }
       ]
-    }, 
+    },
     {
-      "query": "select * from naptan_railway_stations where LatLong && ST_MakeEnvelope($1, $2, $3, $4, 4326);", 
-      "description": "Find railway stations within a region", 
-      "name": "extent", 
+      "query": "select * from naptan_railway_stations where LatLong && ST_MakeEnvelope($1, $2, $3, $4, 4326);",
+      "description": "Find railway stations within a region",
+      "name": "extent",
       "fields": [
         {
-          "type": "float", 
+          "type": "float",
           "name": "top-left-lat"
-        }, 
+        },
         {
-          "type": "float", 
+          "type": "float",
           "name": "top-left-lon"
-        }, 
+        },
         {
-          "type": "float", 
+          "type": "float",
           "name": "bottom-right-lat"
-        }, 
+        },
         {
-          "type": "float", 
+          "type": "float",
           "name": "bottom-right-lon"
         }
       ]
-    }, 
+    },
     {
-      "query": "select * from naptan_railway_stations where ST_DISTANCE((select latlong from codepoint where postcode = normalise_postcode($1)), latlong) < $2;", 
-      "description": "Find ferry ports near to a postcode", 
-      "name": "postcode", 
+      "query": "select * from naptan_railway_stations where ST_DISTANCE((select latlong from codepoint where postcode = normalise_postcode($1)), latlong) < $2;",
+      "description": "Find ferry ports near to a postcode",
+      "name": "postcode",
       "fields": [
         {
-          "type": "string", 
+          "type": "string",
           "name": "postcode"
-        }, 
+        },
         {
-          "type": "integer", 
+          "type": "integer",
           "name": "distance"
         }
       ]
     }
-  ], 
-  "id": "naptan_railway_stations", 
+  ],
+  "id": "naptan_railway_stations",
   "choice_fields": null
 }
