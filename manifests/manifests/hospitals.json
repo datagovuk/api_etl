@@ -1,133 +1,134 @@
 {
-  "title": "Location of NHS Hospitals", 
+  "title": "Location of NHS Hospitals",
+  "dataset": "https://data.gov.uk/dataset/hospitals_",
   "fields": [
     {
-      "type": "string", 
+      "type": "string",
       "name": "city"
-    }, 
+    },
     {
-      "type": "string", 
+      "type": "string",
       "name": "parent_name"
-    }, 
+    },
     {
-      "type": "string", 
+      "type": "string",
       "name": "latitude"
-    }, 
+    },
     {
-      "type": "string", 
+      "type": "string",
       "name": "organisation_id"
-    }, 
+    },
     {
-      "type": "string", 
+      "type": "string",
       "name": "email"
-    }, 
+    },
     {
-      "type": "string", 
+      "type": "string",
       "name": "website"
-    }, 
+    },
     {
-      "type": "string", 
+      "type": "string",
       "name": "fax"
-    }, 
+    },
     {
-      "type": "string", 
+      "type": "string",
       "name": "organisation_name"
-    }, 
+    },
     {
-      "type": "string", 
+      "type": "string",
       "name": "organisation_code"
-    }, 
+    },
     {
-      "type": "string", 
+      "type": "string",
       "name": "organisation_type"
-    }, 
+    },
     {
-      "type": "string", 
+      "type": "string",
       "name": "sub_type"
-    }, 
+    },
     {
-      "type": "string", 
+      "type": "string",
       "name": "address1"
-    }, 
+    },
     {
-      "type": "string", 
+      "type": "string",
       "name": "address2"
-    }, 
+    },
     {
-      "type": "string", 
+      "type": "string",
       "name": "address3"
-    }, 
+    },
     {
-      "type": "string", 
+      "type": "string",
       "name": "phone"
-    }, 
+    },
     {
-      "type": "string", 
+      "type": "string",
       "name": "organisation_status"
-    }, 
+    },
     {
-      "type": "string", 
+      "type": "string",
       "name": "postcode"
-    }, 
+    },
     {
-      "type": "string", 
+      "type": "string",
       "name": "longitude"
-    }, 
+    },
     {
-      "type": "string", 
+      "type": "string",
       "name": "sector"
-    }, 
+    },
     {
-      "type": "string", 
+      "type": "string",
       "name": "county"
-    }, 
+    },
     {
-      "type": "string", 
+      "type": "string",
       "name": "parent_o_d_s_code"
-    }, 
+    },
     {
-      "type": "string", 
+      "type": "string",
       "name": "is_pims_managed"
-    }, 
+    },
     {
-      "type": "string", 
+      "type": "string",
       "name": "partial_postcode"
     }
-  ], 
-  "tablename": "hospitals", 
-  "theme": "health", 
+  ],
+  "tablename": "hospitals",
+  "theme": "health",
   "queries": [
     {
-      "query": "select * from hospitals", 
-      "name": "all_hospitals", 
+      "query": "select * from hospitals",
+      "name": "all_hospitals",
       "description": "Show all hospital"
-    }, 
+    },
     {
-      "query": "select * from hospitals where LOWER(partial_postcode) = LOWER($1)", 
-      "description": "Find hospitals using just a partial postcode  (e.g. CH64, or L1)", 
-      "name": "partial_postcode", 
+      "query": "select * from hospitals where LOWER(partial_postcode) = LOWER($1)",
+      "description": "Find hospitals using just a partial postcode  (e.g. CH64, or L1)",
+      "name": "partial_postcode",
       "fields": [
         {
-          "type": "string", 
+          "type": "string",
           "name": "partial_postcode"
         }
       ]
-    }, 
+    },
     {
-      "query": "select * from hospitals where LOWER(organisation_name) ILIKE '%' || LOWER($1) || '%'", 
-      "description": "Find hospitals by name", 
-      "name": "organisation_name", 
+      "query": "select * from hospitals where LOWER(organisation_name) ILIKE '%' || LOWER($1) || '%'",
+      "description": "Find hospitals by name",
+      "name": "organisation_name",
       "fields": [
         {
-          "type": "string", 
+          "type": "string",
           "name": "organisation_name"
         }
       ]
     }
-  ], 
-  "id": "hospitals", 
+  ],
+  "id": "hospitals",
   "choice_fields": [
-    "city", 
+    "city",
     "county"
   ]
 }

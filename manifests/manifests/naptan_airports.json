@@ -1,28 +1,29 @@
 {
-  "title": "National Public Transport Access Nodes (NaPTAN) - Airports", 
+  "title": "National Public Transport Access Nodes (NaPTAN) - Airports",
+  "dataset": "https://data.gov.uk/dataset/naptan",
   "fields": [
     {
-      "type": "string", 
+      "type": "string",
       "name": "atcocode"
-    }, 
+    },
     {
-      "type": "string", 
+      "type": "string",
       "name": "iatacode"
-    }, 
+    },
     {
-      "type": "string", 
+      "type": "string",
       "name": "name"
     }
-  ], 
-  "tablename": "naptan_airports", 
-  "theme": "transport", 
+  ],
+  "tablename": "naptan_airports",
+  "theme": "transport",
   "queries": [
     {
-      "query": "select * from naptan_airports;", 
-      "name": "all", 
+      "query": "select * from naptan_airports;",
+      "name": "all",
       "description": "Show all airports"
     }
-  ], 
-  "id": "naptan_airports", 
+  ],
+  "id": "naptan_airports",
   "choice_fields": null
 }

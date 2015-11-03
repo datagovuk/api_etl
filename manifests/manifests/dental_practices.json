@@ -1,113 +1,114 @@
 {
-  "title": "Location of General Dental Practices", 
+  "title": "Location of General Dental Practices",
+  "dataset": "https://data.gov.uk/dataset/general-dental-practices",
   "fields": [
     {
-      "type": "string", 
+      "type": "string",
       "name": "organisation_code"
-    }, 
+    },
     {
-      "type": "string", 
+      "type": "string",
       "name": "postcode"
-    }, 
+    },
     {
-      "type": "string", 
+      "type": "string",
       "name": "organisation_sub_type_code"
-    }, 
+    },
     {
-      "type": "string", 
+      "type": "string",
       "name": "address_line_1"
-    }, 
+    },
     {
-      "type": "string", 
+      "type": "string",
       "name": "address_line_2"
-    }, 
+    },
     {
-      "type": "string", 
+      "type": "string",
       "name": "address_line_3"
-    }, 
+    },
     {
-      "type": "string", 
+      "type": "string",
       "name": "address_line_4"
-    }, 
+    },
     {
-      "type": "string", 
+      "type": "string",
       "name": "address_line_5"
-    }, 
+    },
     {
-      "type": "string", 
+      "type": "string",
       "name": "open_date"
-    }, 
+    },
     {
-      "type": "string", 
+      "type": "string",
       "name": "status_code"
-    }, 
+    },
     {
-      "type": "string", 
+      "type": "string",
       "name": "close_date"
-    }, 
+    },
     {
-      "type": "string", 
+      "type": "string",
       "name": "parent_organisation_code"
-    }, 
+    },
     {
-      "type": "string", 
+      "type": "string",
       "name": "amended_record_indicator"
-    }, 
+    },
     {
-      "type": "string", 
+      "type": "string",
       "name": "left_parent_date"
-    }, 
+    },
     {
-      "type": "string", 
+      "type": "string",
       "name": "higher_health_authority"
-    }, 
+    },
     {
-      "type": "string", 
+      "type": "string",
       "name": "name"
-    }, 
+    },
     {
-      "type": "string", 
+      "type": "string",
       "name": "national_grouping"
-    }, 
+    },
     {
-      "type": "string", 
+      "type": "string",
       "name": "join_parent_date"
-    }, 
+    },
     {
-      "type": "string", 
+      "type": "string",
       "name": "contact_telephone_number"
-    }, 
+    },
     {
-      "type": "string", 
+      "type": "string",
       "name": "partial_postcode"
     }
-  ], 
-  "tablename": "dental_practices", 
-  "theme": "health", 
+  ],
+  "tablename": "dental_practices",
+  "theme": "health",
   "queries": [
     {
-      "query": "select * from dental_practices where LOWER(partial_postcode) = LOWER($1)", 
-      "description": "Find dental practices using just a partial postcode (e.g. CH64, or L1)", 
-      "name": "partial_postcode", 
+      "query": "select * from dental_practices where LOWER(partial_postcode) = LOWER($1)",
+      "description": "Find dental practices using just a partial postcode (e.g. CH64, or L1)",
+      "name": "partial_postcode",
       "fields": [
         {
-          "type": "string", 
+          "type": "string",
           "name": "partial_postcode"
         }
       ]
-    }, 
+    },
     {
-      "query": "select * from dental_practices where LOWER(name) ILIKE '%' || LOWER($1) || '%'", 
-      "description": "Find hospitals by name", 
-      "name": "name", 
+      "query": "select * from dental_practices where LOWER(name) ILIKE '%' || LOWER($1) || '%'",
+      "description": "Find hospitals by name",
+      "name": "name",
       "fields": [
         {
-          "type": "string", 
+          "type": "string",
           "name": "name"
         }
       ]
     }
-  ], 
-  "id": "dental_practices", 
+  ],
+  "id": "dental_practices",
   "choice_fields": []
 }

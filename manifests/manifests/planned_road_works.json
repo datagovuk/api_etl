@@ -1,78 +1,79 @@
 {
-  "title": "Information on planned roadworks carried out on the Highways Agency network", 
+  "title": "Information on planned roadworks carried out on the Highways Agency network",
+  "dataset": "https://data.gov.uk/dataset/highways_agency_planned_roadworks",
   "fields": [
     {
-      "type": "string", 
+      "type": "string",
       "name": "reference_number"
-    }, 
+    },
     {
-      "type": "string", 
+      "type": "string",
       "name": "road"
-    }, 
+    },
     {
-      "type": "string", 
+      "type": "string",
       "name": "local_authority"
-    }, 
+    },
     {
-      "type": "string", 
+      "type": "string",
       "name": "location"
-    }, 
+    },
     {
-      "type": "timestamp without time zone", 
+      "type": "timestamp without time zone",
       "name": "start_date"
-    }, 
+    },
     {
-      "type": "timestamp without time zone", 
+      "type": "timestamp without time zone",
       "name": "end_date"
-    }, 
+    },
     {
-      "type": "string", 
+      "type": "string",
       "name": "expected_delay"
-    }, 
+    },
     {
-      "type": "string", 
+      "type": "string",
       "name": "description"
-    }, 
+    },
     {
-      "type": "string", 
+      "type": "string",
       "name": "traffic_management"
-    }, 
+    },
     {
-      "type": "string", 
+      "type": "string",
       "name": "closure_type"
-    }, 
+    },
     {
-      "type": "string", 
+      "type": "string",
       "name": "centre_easting"
-    }, 
+    },
     {
-      "type": "string", 
+      "type": "string",
       "name": "centre_northing"
-    }, 
+    },
     {
-      "type": "string", 
+      "type": "string",
       "name": "status"
-    }, 
+    },
     {
-      "type": "timestamp without time zone", 
+      "type": "timestamp without time zone",
       "name": "published_date"
     }
-  ], 
-  "tablename": "planned_road_works", 
-  "theme": "transport", 
+  ],
+  "tablename": "planned_road_works",
+  "theme": "transport",
   "queries": [
     {
-      "query": "select * from  planned_road_works where LOWER(road) = LOWER($1)", 
-      "description": "Find planned and historical roadworks by road (e.g. M1)", 
-      "name": "road", 
+      "query": "select * from  planned_road_works where LOWER(road) = LOWER($1)",
+      "description": "Find planned and historical roadworks by road (e.g. M1)",
+      "name": "road",
       "fields": [
         {
-          "type": "string", 
+          "type": "string",
           "name": "road"
         }
       ]
     }
-  ], 
-  "id": "planned_road_works", 
+  ],
+  "id": "planned_road_works",
   "choice_fields": null
 }

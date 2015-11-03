@@ -1,128 +1,129 @@
 {
-  "title": "Social Care service locations", 
+  "title": "Social Care service locations",
+  "dataset": "https://data.gov.uk/dataset/social-care-locations",
   "fields": [
     {
-      "type": "string", 
+      "type": "string",
       "name": "city"
-    }, 
+    },
     {
-      "type": "string", 
+      "type": "string",
       "name": "parent_name"
-    }, 
+    },
     {
-      "type": "string", 
+      "type": "string",
       "name": "latitude"
-    }, 
+    },
     {
-      "type": "string", 
+      "type": "string",
       "name": "organisation_id"
-    }, 
+    },
     {
-      "type": "string", 
+      "type": "string",
       "name": "email"
-    }, 
+    },
     {
-      "type": "string", 
+      "type": "string",
       "name": "website"
-    }, 
+    },
     {
-      "type": "string", 
+      "type": "string",
       "name": "fax"
-    }, 
+    },
     {
-      "type": "string", 
+      "type": "string",
       "name": "organisation_name"
-    }, 
+    },
     {
-      "type": "string", 
+      "type": "string",
       "name": "organisation_code"
-    }, 
+    },
     {
-      "type": "string", 
+      "type": "string",
       "name": "organisation_type"
-    }, 
+    },
     {
-      "type": "string", 
+      "type": "string",
       "name": "sub_type"
-    }, 
+    },
     {
-      "type": "string", 
+      "type": "string",
       "name": "address1"
-    }, 
+    },
     {
-      "type": "string", 
+      "type": "string",
       "name": "address2"
-    }, 
+    },
     {
-      "type": "string", 
+      "type": "string",
       "name": "address3"
-    }, 
+    },
     {
-      "type": "string", 
+      "type": "string",
       "name": "local_authority"
-    }, 
+    },
     {
-      "type": "string", 
+      "type": "string",
       "name": "phone"
-    }, 
+    },
     {
-      "type": "string", 
+      "type": "string",
       "name": "organisation_status"
-    }, 
+    },
     {
-      "type": "string", 
+      "type": "string",
       "name": "postcode"
-    }, 
+    },
     {
-      "type": "string", 
+      "type": "string",
       "name": "longitude"
-    }, 
+    },
     {
-      "type": "string", 
+      "type": "string",
       "name": "county"
-    }, 
+    },
     {
-      "type": "string", 
+      "type": "string",
       "name": "parent_o_d_s_code"
-    }, 
+    },
     {
-      "type": "string", 
+      "type": "string",
       "name": "is_pims_managed"
-    }, 
+    },
     {
-      "type": "string", 
+      "type": "string",
       "name": "partial_postcode"
     }
-  ], 
-  "tablename": "social_care_locations", 
-  "theme": "health", 
+  ],
+  "tablename": "social_care_locations",
+  "theme": "health",
   "queries": [
     {
-      "query": "select * from social_care_locations where LOWER(partial_postcode) = LOWER($1)", 
-      "description": "Find locations using just a partial postcode (e.g. CH64, or L1)", 
-      "name": "partial_postcode", 
+      "query": "select * from social_care_locations where LOWER(partial_postcode) = LOWER($1)",
+      "description": "Find locations using just a partial postcode (e.g. CH64, or L1)",
+      "name": "partial_postcode",
       "fields": [
         {
-          "type": "string", 
+          "type": "string",
           "name": "partial_postcode"
         }
       ]
-    }, 
+    },
     {
-      "query": "select * from social_care_locations where LOWER(organisation_name) LIKE '%' || LOWER($1) || '%'", 
-      "description": "Find locations by name", 
-      "name": "organisation_name", 
+      "query": "select * from social_care_locations where LOWER(organisation_name) LIKE '%' || LOWER($1) || '%'",
+      "description": "Find locations by name",
+      "name": "organisation_name",
       "fields": [
         {
-          "type": "string", 
+          "type": "string",
           "name": "organisation_name"
         }
       ]
     }
-  ], 
-  "id": "social_care_locations", 
+  ],
+  "id": "social_care_locations",
   "choice_fields": [
-    "city", 
+    "city",
     "county"
   ]
 }

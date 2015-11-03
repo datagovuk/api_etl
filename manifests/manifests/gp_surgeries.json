@@ -1,128 +1,129 @@
 {
-  "title": "GP Surgeries", 
+  "title": "GP Surgeries",
+  "dataset": "https://data.gov.uk/dataset/gp-practices-and-surgeries",
   "fields": [
     {
-      "type": "string", 
+      "type": "string",
       "name": "city"
-    }, 
+    },
     {
-      "type": "string", 
+      "type": "string",
       "name": "parent_name"
-    }, 
+    },
     {
-      "type": "string", 
+      "type": "string",
       "name": "latitude"
-    }, 
+    },
     {
-      "type": "string", 
+      "type": "string",
       "name": "organisation_id"
-    }, 
+    },
     {
-      "type": "string", 
+      "type": "string",
       "name": "email"
-    }, 
+    },
     {
-      "type": "string", 
+      "type": "string",
       "name": "website"
-    }, 
+    },
     {
-      "type": "string", 
+      "type": "string",
       "name": "fax"
-    }, 
+    },
     {
-      "type": "string", 
+      "type": "string",
       "name": "organisation_name"
-    }, 
+    },
     {
-      "type": "string", 
+      "type": "string",
       "name": "organisation_code"
-    }, 
+    },
     {
-      "type": "string", 
+      "type": "string",
       "name": "organisation_type"
-    }, 
+    },
     {
-      "type": "string", 
+      "type": "string",
       "name": "sub_type"
-    }, 
+    },
     {
-      "type": "string", 
+      "type": "string",
       "name": "address1"
-    }, 
+    },
     {
-      "type": "string", 
+      "type": "string",
       "name": "address2"
-    }, 
+    },
     {
-      "type": "string", 
+      "type": "string",
       "name": "address3"
-    }, 
+    },
     {
-      "type": "string", 
+      "type": "string",
       "name": "phone"
-    }, 
+    },
     {
-      "type": "string", 
+      "type": "string",
       "name": "organisation_status"
-    }, 
+    },
     {
-      "type": "string", 
+      "type": "string",
       "name": "is_e_p_s_enabled"
-    }, 
+    },
     {
-      "type": "string", 
+      "type": "string",
       "name": "postcode"
-    }, 
+    },
     {
-      "type": "string", 
+      "type": "string",
       "name": "longitude"
-    }, 
+    },
     {
-      "type": "string", 
+      "type": "string",
       "name": "county"
-    }, 
+    },
     {
-      "type": "string", 
+      "type": "string",
       "name": "parent_o_d_s_code"
-    }, 
+    },
     {
-      "type": "string", 
+      "type": "string",
       "name": "is_pims_managed"
-    }, 
+    },
     {
-      "type": "string", 
+      "type": "string",
       "name": "partial_postcode"
     }
-  ], 
-  "tablename": "gp_surgeries", 
-  "theme": "health", 
+  ],
+  "tablename": "gp_surgeries",
+  "theme": "health",
   "queries": [
     {
-      "query": "select * from gp_surgeries where LOWER(partial_postcode) = LOWER($1)", 
-      "description": "Find surgeries using just a partial postcode (e.g. CH64, or L1)", 
-      "name": "partial_postcode", 
+      "query": "select * from gp_surgeries where LOWER(partial_postcode) = LOWER($1)",
+      "description": "Find surgeries using just a partial postcode (e.g. CH64, or L1)",
+      "name": "partial_postcode",
       "fields": [
         {
-          "type": "string", 
+          "type": "string",
           "name": "partial"
         }
       ]
-    }, 
+    },
     {
-      "query": "select * from gp_surgeries where LOWER(organisation_name) LIKE '%' || LOWER($1) || '%'", 
-      "description": "Find surgeries by name", 
-      "name": "organisation_name", 
+      "query": "select * from gp_surgeries where LOWER(organisation_name) LIKE '%' || LOWER($1) || '%'",
+      "description": "Find surgeries by name",
+      "name": "organisation_name",
       "fields": [
         {
-          "type": "string", 
+          "type": "string",
           "name": "organisation_name"
         }
       ]
     }
-  ], 
-  "id": "gp_surgeries", 
+  ],
+  "id": "gp_surgeries",
   "choice_fields": [
-    "city", 
+    "city",
     "county"
   ]
 }
