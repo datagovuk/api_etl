@@ -38,11 +38,13 @@
       "fields": [
         {
           "type": "float",
-          "name": "lat"
+          "name": "lat",
+          "default": "-0.1280"
         },
         {
           "type": "float",
-          "name": "lon"
+          "name": "lon",
+          "default": "51.5077"
         }
       ]
     },
@@ -53,34 +55,40 @@
       "fields": [
         {
           "type": "float",
-          "name": "top-left-lat"
+          "name": "top-left-lat",
+          "default": "-2.24"
         },
         {
           "type": "float",
-          "name": "top-left-lon"
+          "name": "top-left-lon",
+          "default": "52.3"
         },
         {
           "type": "float",
-          "name": "bottom-right-lat"
+          "name": "bottom-right-lat",
+          "default": "-1.65"
         },
         {
           "type": "float",
-          "name": "bottom-right-lon"
+          "name": "bottom-right-lon",
+          "default": "52.68"
         }
       ]
     },
     {
-      "query": "select * from naptan_railway_stations where ST_DISTANCE((select latlong from codepoint where postcode = normalise_postcode($1)), latlong) < $2;",
-      "description": "Find railway stations near to a postcode",
+      "query": "select * from naptan_railway_stations where ST_DISTANCE((select latlong from codepoint where postcode = normalise_postcode($1)), latlong) < (1000 * $2);",
+      "description": "Find railway stations near to a postcode (distance in km)",
       "name": "postcode",
       "fields": [
         {
           "type": "string",
-          "name": "postcode"
+          "name": "postcode",
+          "default": "NW1 1AH"
         },
         {
           "type": "integer",
-          "name": "distance"
+          "name": "distance",
+          "default": "1"
         }
       ]
     }

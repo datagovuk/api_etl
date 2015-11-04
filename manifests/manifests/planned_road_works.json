@@ -69,7 +69,8 @@
       "fields": [
         {
           "type": "string",
-          "name": "road"
+          "name": "road",
+          "default": "M62"
         }
       ]
     }

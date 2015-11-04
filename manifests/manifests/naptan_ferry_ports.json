@@ -34,11 +34,13 @@
       "fields": [
         {
           "type": "float",
-          "name": "lat"
+          "name": "lat",
+          "default": "53.1"
         },
         {
           "type": "float",
-          "name": "lon"
+          "name": "lon",
+          "default": "3.0"
         }
       ]
     },
@@ -49,34 +51,40 @@
       "fields": [
         {
           "type": "float",
-          "name": "top-left-lat"
+          "name": "top-left-lat",
+          "default": "0.99"
         },
         {
           "type": "float",
-          "name": "top-left-lon"
+          "name": "top-left-lon",
+          "default": "52.07"
         },
         {
           "type": "float",
-          "name": "bottom-right-lat"
+          "name": "bottom-right-lat",
+          "default": "1.97"
         },
         {
           "type": "float",
-          "name": "bottom-right-lon"
+          "name": "bottom-right-lon",
+          "default": "53.01"
         }
       ]
     },
     {
-      "query": "select * from naptan_ferry_ports where ST_DISTANCE((select latlong from codepoint where postcode = normalise_postcode($1)), latlong) < $2;",
-      "description": "Find ferry ports near to a postcode",
+      "query": "select * from naptan_ferry_ports where ST_DISTANCE((select latlong from codepoint where postcode = normalise_postcode($1)), latlong) < (1000 * $2);",
+      "description": "Find ferry ports near to a postcode (distance in kilometers)",
       "name": "postcode",
       "fields": [
         {
           "type": "string",
-          "name": "postcode"
+          "name": "postcode",
+          "default": "L1 0AA"
         },
         {
           "type": "integer",
-          "name": "distance"
+          "name": "distance",
+          "default": "10"
         }
       ]
     }

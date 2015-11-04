@@ -34,11 +34,13 @@
       "fields": [
         {
           "type": "float",
-          "name": "lat"
+          "name": "lat",
+          "default": "53.1"
         },
         {
           "type": "float",
-          "name": "lon"
+          "name": "lon",
+          "default": "1.1"
         }
       ]
     },
@@ -49,34 +51,40 @@
       "fields": [
         {
           "type": "float",
-          "name": "top-left-lat"
+          "name": "top-left-lat",
+          "default": "-5.86"
         },
         {
           "type": "float",
-          "name": "top-left-lon"
+          "name": "top-left-lon",
+          "default": "49.93"
         },
         {
           "type": "float",
-          "name": "bottom-right-lat"
+          "name": "bottom-right-lat",
+          "default": "-4.61"
         },
         {
           "type": "float",
-          "name": "bottom-right-lon"
+          "name": "bottom-right-lon",
+          "default": "50.72"
         }
       ]
     },
     {
-      "query": "select * from naptan_coach_stations where ST_DISTANCE((select latlong from codepoint where postcode = normalise_postcode($1)), latlong) < $2;",
-      "description": "Find ferry ports near to a postcode",
+      "query": "select * from naptan_coach_stations where ST_DISTANCE((select latlong from codepoint where postcode = normalise_postcode($1)), latlong) < (1000 * $2);",
+      "description": "Find coach stations near to a postcode (distance in km)",
       "name": "postcode",
       "fields": [
         {
           "type": "string",
-          "name": "postcode"
+          "name": "postcode",
+          "default": "EC1V 9HQ"
         },
         {
           "type": "integer",
-          "name": "distance"
+          "name": "distance",
+          "default": "1"
         }
       ]
     }

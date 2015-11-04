@@ -12,7 +12,8 @@
       "fields": [
         {
           "type": "string",
-          "name": "partial_postcode"
+          "name": "partial_postcode",
+          "default": "M1"
         }
       ]
     },
@@ -23,7 +24,8 @@
       "fields": [
         {
           "type": "string",
-          "name": "organisation_name"
+          "name": "organisation_name",
+          "default": "Deeside"
         }
       ]
     }

@@ -110,7 +110,8 @@
       "fields": [
         {
           "type": "string",
-          "name": "partial_postcode"
+          "name": "partial_postcode",
+          "default": "L3"
         }
       ]
     },
@@ -121,7 +122,8 @@
       "fields": [
         {
           "type": "string",
-          "name": "organisation_name"
+          "name": "organisation_name",
+          "default": "Community Hospital"
         }
       ]
     }

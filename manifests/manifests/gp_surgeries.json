@@ -105,7 +105,8 @@
       "fields": [
         {
           "type": "string",
-          "name": "partial"
+          "name": "partial",
+          "default": "M1"
         }
       ]
     },
@@ -116,7 +117,8 @@
       "fields": [
         {
           "type": "string",
-          "name": "organisation_name"
+          "name": "organisation_name",
+          "default": "Thornfield"
         }
       ]
     }

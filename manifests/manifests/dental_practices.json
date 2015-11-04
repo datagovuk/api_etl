@@ -93,18 +93,20 @@
       "fields": [
         {
           "type": "string",
-          "name": "partial_postcode"
+          "name": "partial_postcode",
+          "default": "M1"
         }
       ]
     },
     {
       "query": "select * from dental_practices where LOWER(name) ILIKE '%' || LOWER($1) || '%'",
-      "description": "Find hospitals by name",
+      "description": "Find dental practices by name",
       "name": "name",
       "fields": [
         {
           "type": "string",
-          "name": "name"
+          "name": "name",
+          "default": "teeth"
         }
       ]
     }
