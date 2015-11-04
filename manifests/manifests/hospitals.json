@@ -101,7 +101,7 @@
     {
       "query": "select * from hospitals",
       "name": "all_hospitals",
-      "description": "Show all hospital"
+      "description": "Show all hospitals"
     },
     {
       "query": "select * from hospitals where LOWER(partial_postcode) = LOWER($1)",
