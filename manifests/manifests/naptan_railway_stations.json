@@ -49,7 +49,7 @@
       ]
     },
     {
-      "query": "select * from naptan_railway_stations where LatLong && ST_MakeEnvelope($1, $2, $3, $4, 4326);",
+      "query": "select * from naptan_railway_stations where LatLong && ST_MakeEnvelope($2, $1, $4, $3, 4326);",
       "description": "Find railway stations within a region",
       "name": "extent",
       "fields": [

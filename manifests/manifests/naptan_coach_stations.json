@@ -45,7 +45,7 @@
       ]
     },
     {
-      "query": "select * from naptan_coach_stations where LatLong && ST_MakeEnvelope($1, $2, $3, $4, 4326);",
+      "query": "select * from naptan_coach_stations where LatLong && ST_MakeEnvelope($2, $1, $4, $3, 4326);",
       "description": "Find coach stations within a region",
       "name": "extent",
       "fields": [

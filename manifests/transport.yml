@@ -46,7 +46,7 @@ services:
               type: float
         - name: extent
           description: Find ferry ports within a region
-          query: select * from naptan_ferry_ports where LatLong && ST_MakeEnvelope($1, $2, $3, $4, 4326);
+          query: select * from naptan_ferry_ports where LatLong && ST_MakeEnvelope($2, $1, $4, $3, 4326);
           fields:
             - name: top-left-lat
               type: float
@@ -106,7 +106,7 @@ services:
               type: float
         - name: extent
           description: Find coach stations within a region
-          query: select * from naptan_coach_stations where LatLong && ST_MakeEnvelope($1, $2, $3, $4, 4326);
+          query: select * from naptan_coach_stations where LatLong && ST_MakeEnvelope($2, $1, $4, $3, 4326);
           fields:
             - name: top-left-lat
               type: float
@@ -149,7 +149,7 @@ services:
               type: float
         - name: extent
           description: Find railway stations within a region
-          query: select * from naptan_railway_stations where LatLong && ST_MakeEnvelope($1, $2, $3, $4, 4326);
+          query: select * from naptan_railway_stations where LatLong && ST_MakeEnvelope($2, $1, $4, $3, 4326);
           fields:
             - name: top-left-lat
               type: float
