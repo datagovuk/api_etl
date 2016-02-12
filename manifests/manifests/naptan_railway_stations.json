@@ -32,7 +32,7 @@
   "theme": "transport",
   "queries": [
     {
-      "query": "select * from naptan_railway_stations order by ST_Distance(LatLong, ST_SetSRID(ST_MakePoint($1, $2), 4326));",
+      "query": "select * from naptan_railway_stations order by ST_Distance(LatLong, ST_SetSRID(ST_MakePoint($2, $1), 4326));",
       "description": "Find railway stations closest to a lat/lon point",
       "name": "nearest",
       "fields": [
