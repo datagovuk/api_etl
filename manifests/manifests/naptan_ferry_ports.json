@@ -28,7 +28,7 @@
   "theme": "transport",
   "queries": [
     {
-      "query": "select * from naptan_ferry_ports order by ST_Distance(LatLong, ST_SetSRID(ST_MakePoint($1, $2), 4326));",
+      "query": "select * from naptan_ferry_ports order by ST_Distance(LatLong, ST_SetSRID(ST_MakePoint($2, $1), 4326));",
       "description": "Find ferry ports closest to a lat/lon point",
       "name": "nearest",
       "fields": [
@@ -45,29 +45,29 @@
       ]
     },
     {
-      "query": "select * from naptan_ferry_ports where LatLong && ST_MakeEnvelope($1, $2, $3, $4, 4326);",
+      "query": "select * from naptan_ferry_ports where LatLong && ST_MakeEnvelope($2, $1, $4, $3, 4326);",
       "description": "Find ferry ports within a region",
       "name": "extent",
       "fields": [
         {
           "type": "float",
           "name": "top-left-lat",
-          "default": "0.99"
-        },
-        {
-          "type": "float",
-          "name": "top-left-lon",
           "default": "52.07"
         },
         {
           "type": "float",
+          "name": "top-left-lon",
+          "default": "0.99"
+        },
+        {
+          "type": "float",
           "name": "bottom-right-lat",
-          "default": "1.97"
+          "default": "53.01"
         },
         {
           "type": "float",
           "name": "bottom-right-lon",
-          "default": "53.01"
+          "default": "1.97"
         }
       ]
     },

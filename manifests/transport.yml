@@ -38,7 +38,7 @@ services:
       searchables:
         - name: nearest
           description: Find ferry ports closest to a lat/lon point
-          query: select * from naptan_ferry_ports order by ST_Distance(LatLong, ST_SetSRID(ST_MakePoint($1, $2), 4326));
+          query: select * from naptan_ferry_ports order by ST_Distance(LatLong, ST_SetSRID(ST_MakePoint($2, $1), 4326));
           fields:
             - name: lat
               type: float
@@ -46,7 +46,7 @@ services:
               type: float
         - name: extent
           description: Find ferry ports within a region
-          query: select * from naptan_ferry_ports where LatLong && ST_MakeEnvelope($1, $2, $3, $4, 4326);
+          query: select * from naptan_ferry_ports where LatLong && ST_MakeEnvelope($2, $1, $4, $3, 4326);
           fields:
             - name: top-left-lat
               type: float
@@ -98,7 +98,7 @@ services:
       searchables:
         - name: nearest
           description: Find coach stations closest to a lat/lon point
-          query: select * from naptan_coach_stations order by ST_Distance(LatLong, ST_SetSRID(ST_MakePoint($1, $2), 4326));
+          query: select * from naptan_coach_stations order by ST_Distance(LatLong, ST_SetSRID(ST_MakePoint($2, $1), 4326));
           fields:
             - name: lat
               type: float
@@ -106,7 +106,7 @@ services:
               type: float
         - name: extent
           description: Find coach stations within a region
-          query: select * from naptan_coach_stations where LatLong && ST_MakeEnvelope($1, $2, $3, $4, 4326);
+          query: select * from naptan_coach_stations where LatLong && ST_MakeEnvelope($2, $1, $4, $3, 4326);
           fields:
             - name: top-left-lat
               type: float
@@ -141,7 +141,7 @@ services:
       searchables:
         - name: nearest
           description: Find railway stations closest to a lat/lon point
-          query: select * from naptan_railway_stations order by ST_Distance(LatLong, ST_SetSRID(ST_MakePoint($1, $2), 4326));
+          query: select * from naptan_railway_stations order by ST_Distance(LatLong, ST_SetSRID(ST_MakePoint($2, $1), 4326));
           fields:
             - name: lat
               type: float
@@ -149,7 +149,7 @@ services:
               type: float
         - name: extent
           description: Find railway stations within a region
-          query: select * from naptan_railway_stations where LatLong && ST_MakeEnvelope($1, $2, $3, $4, 4326);
+          query: select * from naptan_railway_stations where LatLong && ST_MakeEnvelope($2, $1, $4, $3, 4326);
           fields:
             - name: top-left-lat
               type: float
