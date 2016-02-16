@@ -39,12 +39,12 @@
         {
           "type": "float",
           "name": "lat",
-          "default": "-0.1280"
+          "default": "51.5077"
         },
         {
           "type": "float",
           "name": "lon",
-          "default": "51.5077"
+          "default": "-0.1280"
         }
       ]
     },
@@ -56,22 +56,22 @@
         {
           "type": "float",
           "name": "top-left-lat",
-          "default": "-2.24"
-        },
-        {
-          "type": "float",
-          "name": "top-left-lon",
           "default": "52.3"
         },
         {
           "type": "float",
+          "name": "top-left-lon",
+          "default": "-2.24"
+        },
+        {
+          "type": "float",
           "name": "bottom-right-lat",
-          "default": "-1.65"
+          "default": "52.68"
         },
         {
           "type": "float",
           "name": "bottom-right-lon",
-          "default": "52.68"
+          "default": "-1.65"
         }
       ]
     },
@@ -88,7 +88,7 @@
         {
           "type": "integer",
           "name": "distance",
-          "default": "1"
+          "default": "10"
         }
       ]
     }

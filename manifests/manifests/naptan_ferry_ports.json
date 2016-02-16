@@ -52,22 +52,22 @@
         {
           "type": "float",
           "name": "top-left-lat",
-          "default": "0.99"
-        },
-        {
-          "type": "float",
-          "name": "top-left-lon",
           "default": "52.07"
         },
         {
           "type": "float",
+          "name": "top-left-lon",
+          "default": "0.99"
+        },
+        {
+          "type": "float",
           "name": "bottom-right-lat",
-          "default": "1.97"
+          "default": "53.01"
         },
         {
           "type": "float",
           "name": "bottom-right-lon",
-          "default": "53.01"
+          "default": "1.97"
         }
       ]
     },
