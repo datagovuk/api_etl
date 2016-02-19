@@ -1,5 +1,6 @@
 {
-  "title": "National Public Transport Access Nodes (NaPTAN) - Ferry Ports",
+  "title": "Ferry Ports",
+  "description": "National Public Transport Access Nodes (NaPTAN) - Ferry Ports",
   "dataset": "https://data.gov.uk/dataset/naptan",
   "geo": true,
   "fields": [

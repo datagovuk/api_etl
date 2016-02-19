@@ -1,5 +1,6 @@
 {
-  "title": "Information on planned roadworks carried out on the Highways Agency network",
+  "title": "Planned roadworks",
+  "description": "Information on planned roadworks carried out on the Highways Agency network",
   "dataset": "https://data.gov.uk/dataset/highways_agency_planned_roadworks",
   "fields": [
     {

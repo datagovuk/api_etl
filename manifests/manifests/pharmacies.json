@@ -1,5 +1,6 @@
 {
-  "title": "Information about pharmacies",
+  "title": "Pharmacies",
+  "description": "Information about pharmacies",
   "dataset": "https://data.gov.uk/dataset/pharmacies",
   "fields": [],
   "tablename": "pharmacies",

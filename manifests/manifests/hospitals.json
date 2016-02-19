@@ -1,5 +1,6 @@
 {
-  "title": "Location of NHS Hospitals",
+  "title": "Hospitals",
+  "description": "Location of NHS Hospitals",
   "dataset": "https://data.gov.uk/dataset/hospitals_",
   "fields": [
     {

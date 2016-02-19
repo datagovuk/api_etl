@@ -1,5 +1,6 @@
 {
-  "title": "Location of General Dental Practices",
+  "title": "General Dental Practices",
+  "description": "Location of General Dental Practices",
   "dataset": "https://data.gov.uk/dataset/general-dental-practices",
   "fields": [
     {

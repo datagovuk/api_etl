@@ -1,5 +1,6 @@
 {
   "title": "Social Care service locations",
+  "description": "Information about locations providing social care",
   "dataset": "https://data.gov.uk/dataset/social-care-locations",
   "fields": [
     {
