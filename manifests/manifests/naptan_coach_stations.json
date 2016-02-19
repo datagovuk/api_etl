@@ -1,6 +1,6 @@
 {
   "title": "Coach Stations",
-  "desciption": "National Public Transport Access Nodes (NaPTAN) - Coach Stations",
+  "description": "National Public Transport Access Nodes (NaPTAN) - Coach Stations",
   "dataset": "https://data.gov.uk/dataset/naptan",
   "geo": true,
   "fields": [
