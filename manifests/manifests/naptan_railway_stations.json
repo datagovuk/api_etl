@@ -76,7 +76,7 @@
       ]
     },
     {
-      "query": "select * from naptan_railway_stations where ST_DISTANCE((select latlong from codepoint where postcode = normalise_postcode($1)), latlong) < (1000 * $2);",
+      "query": "with railway_stations as (select *, ST_DISTANCE((select latlong from codepoint where postcode = normalise_postcode($1)), latlong) distance from naptan_railway_stations) select * from railway_stations where distance < (1000 * $2) order by distance asc;",
       "description": "Find railway stations near to a postcode (distance in km)",
       "name": "postcode",
       "fields": [

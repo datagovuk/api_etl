@@ -72,7 +72,7 @@
       ]
     },
     {
-      "query": "select * from naptan_ferry_ports where ST_DISTANCE((select latlong from codepoint where postcode = normalise_postcode($1)), latlong) < (1000 * $2);",
+      "query": "with ferry_ports as (select *, ST_DISTANCE((select latlong from codepoint where postcode = normalise_postcode($1)), latlong) distance from naptan_ferry_ports) select * from ferry_ports where distance < (1000 * $2) order by distance asc;",
       "description": "Find ferry ports near to a postcode (distance in kilometers)",
       "name": "postcode",
       "fields": [
