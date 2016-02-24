@@ -72,7 +72,7 @@
       ]
     },
     {
-      "query": "select * from naptan_coach_stations where ST_DISTANCE((select latlong from codepoint where postcode = normalise_postcode($1)), latlong) < (1000 * $2);",
+      "query": "with coach_stations as (select *, ST_DISTANCE((select latlong from codepoint where postcode = normalise_postcode($1)), latlong) distance from naptan_coach_stations) select * from coach_stations where distance < (1000 * $2) order by distance asc;",
       "description": "Find coach stations near to a postcode (distance in km)",
       "name": "postcode",
       "fields": [
