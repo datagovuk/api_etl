@@ -20,7 +20,7 @@ class CodepointExtractor(lib.Extractor):
 
         if not os.environ.get('NOFETCH', False):
             print "Downloading source file"
-            r = requests.get(source, stream=True)
+            r = requests.get(source, stream=True, verify=False)
             with open(target_file, 'wb') as f:
                 for chunk in r.iter_content(chunk_size=4096):
                     if chunk:

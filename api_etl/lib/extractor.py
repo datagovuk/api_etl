@@ -35,7 +35,7 @@ class CKANExtractor(Extractor):
         if os.environ.get('DEV') and os.path.exists(target_file):
             print "  Skipping file during dev"
         else:
-            r = requests.get(resource['url'], stream=True)
+            r = requests.get(resource['url'], stream=True, verify=False)
             with open(target_file, 'wb') as f:
                 for chunk in r.iter_content(chunk_size=4096):
                     if chunk:

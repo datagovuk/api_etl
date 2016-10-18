@@ -28,7 +28,7 @@ class MOTExtractor(lib.Extractor):
         if os.environ.get('NOFETCH', False):
             return wf
 
-        package = requests.get("https://data.gov.uk/api/3/action/package_show?id=" + service_manifest.dataset).json()
+        package = requests.get("https://data.gov.uk/api/3/action/package_show?id=" + service_manifest.dataset, verify=False).json()
         required_resources = []
         for resource in package['result']['resources']:
             if "testing data results" in resource["description"]:
@@ -48,7 +48,7 @@ class MOTExtractor(lib.Extractor):
         if os.environ.get('DEV') and (os.path.exists(target) or os.path.exists(target[:-3])) :
             print "  Skipping file during dev"
         else:
-            r = requests.get(url, stream=True)
+            r = requests.get(url, stream=True, verify=False)
             with open(target, 'wb') as f:
                 for chunk in r.iter_content(chunk_size=4096):
                     if chunk:

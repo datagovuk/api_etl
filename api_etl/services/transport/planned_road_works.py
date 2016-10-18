@@ -44,7 +44,7 @@ class PlannedRoadWorksExtractor(lib.Extractor):
                 print "  Skipping file during dev"
             else:
                 try:
-                    r = requests.get(resource['url'].strip(), stream=True)
+                    r = requests.get(resource['url'].strip(), stream=True, verify=False)
                     with open(target, 'wb') as f:
                         for chunk in r.iter_content(chunk_size=4096):
                             if chunk:
