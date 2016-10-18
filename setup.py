@@ -13,7 +13,7 @@ config = {
     'install_requires': [
         'nose',
         'pyyaml==3.11',
-        'ckanapi==3.5',
+        'ckanapi==3.6',
         'requests==2.7',
         'unicodecsv==0.13.0',
         'chardet==2.3.0',
