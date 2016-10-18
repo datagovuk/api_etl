@@ -27,7 +27,7 @@ class CKANExtractor(Extractor):
         print "  Fetching resource ({}) metadata".format(service_manifest.resource)
         ckan = ckanapi.RemoteCKAN('https://data.gov.uk',
             user_agent='dgu_api_etl/0.1 (+https://data.gov.uk)')
-        resource = ckan.action.resource_show(id=service_manifest.resource)
+        resource = ckan.action.resource_show(id=service_manifest.resource, requests_kwargs={'verify': False})
 
         target_file = os.path.join(wf, service_manifest.name + "." + resource['format'].lower())
 

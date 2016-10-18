@@ -35,7 +35,7 @@ class PlannedRoadWorksExtractor(lib.Extractor):
             user_agent='dgu_api_etl/0.1 (+http://data.gov.uk)',
             get_only=True)
         count = 0
-        package = ckan.action.package_show(id=service_manifest.dataset)
+        package = ckan.action.package_show(id=service_manifest.dataset, requests_kwargs={'verify': False})
         for resource in package['resources']:
             target = os.path.join(wf, resource['url'].split('/')[-1])
 
