@@ -91,6 +91,11 @@ class PostgresLoader(Loader):
             v = row[c].replace("'", "''")
             vals.append(u"'{}'".format(v).strip())
 
+        if 'latitude' in cols and 'longitude' in cols:
+            if row['latitude'] and row['longitude']:
+                cols.append('latlong')
+                vals.append(u"ST_PointFromText('POINT(%(longitude)s %(latitude)s)', 4326)" % row)
+
         cols = ",".join(cols)
         vals = ','.join(vals)
         q = u"""
@@ -142,6 +147,9 @@ class PostgresLoader(Loader):
 
         for h in headers:
             columns.append("{} TEXT".format(h))
+
+        if 'latitude' in headers and 'longitude' in headers:
+            columns.append("LatLong geography(POINT, 4326)")
 
         if isinstance(pkname, list):
             columns.append("PRIMARY KEY ({})".format(", ".join(pkname)))

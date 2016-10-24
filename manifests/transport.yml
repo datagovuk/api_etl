@@ -25,7 +25,7 @@ services:
       description: "National Public Transport Access Nodes (NaPTAN) - Ferry Ports"
       documentation_url: ""
       schema_url: ""
-      has_geo_data: true,
+      has_geo_data: true
       separator: comma
       dataset: naptan
       resource: e3d0c00c-abb7-4159-b512-5e3ac394780a

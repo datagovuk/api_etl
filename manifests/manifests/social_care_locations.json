@@ -1,6 +1,7 @@
 {
   "title": "Social Care service locations",
   "dataset": "https://data.gov.uk/dataset/social-care-locations",
+  "geo": true,
   "fields": [
     {
       "type": "string",
@@ -119,6 +120,23 @@
           "type": "string",
           "name": "name",
           "default": "Carewatch"
+        }
+      ]
+    },
+    {
+      "query": "select * from social_care_locations order by ST_Distance(LatLong, ST_SetSRID(ST_MakePoint($2, $1), 4326));",
+      "description": "Find social_care_locations closest to a lat/lon point",
+      "name": "nearest",
+      "fields": [
+        {
+          "type": "float",
+          "name": "lat",
+          "default": "53.1"
+        },
+        {
+          "type": "float",
+          "name": "lon",
+          "default": "3.0"
         }
       ]
     }

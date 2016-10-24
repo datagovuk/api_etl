@@ -10,6 +10,7 @@ services:
       encoding: windows-1252
       dataset: hospitals_
       resource: e0f24144-fdfd-4dff-b940-69c737cbc7b4
+      has_geo_data: true
       table_settings:
         pk_name: organisation_id
         index: partial_postcode, name
