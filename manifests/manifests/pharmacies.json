@@ -18,13 +18,13 @@
       ]
     },
     {
-      "query": "select * from pharmacies where LOWER(organisation_name) ILIKE '%' || LOWER($1) || '%'",
+      "query": "select * from pharmacies where LOWER(name) ILIKE '%' || LOWER($1) || '%'",
       "description": "Find pharmacies by name",
       "name": "name",
       "fields": [
         {
           "type": "string",
-          "name": "organisation_name",
+          "name": "name",
           "default": "Deeside"
         }
       ]

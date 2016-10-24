@@ -32,7 +32,7 @@
     },
     {
       "type": "string",
-      "name": "organisation_name"
+      "name": "name"
     },
     {
       "type": "string",
@@ -116,13 +116,13 @@
       ]
     },
     {
-      "query": "select * from hospitals where LOWER(organisation_name) ILIKE '%' || LOWER($1) || '%'",
+      "query": "select * from hospitals where LOWER(name) ILIKE '%' || LOWER($1) || '%'",
       "description": "Find hospitals by name",
-      "name": "organisation_name",
+      "name": "name",
       "fields": [
         {
           "type": "string",
-          "name": "organisation_name",
+          "name": "name",
           "default": "Community Hospital"
         }
       ]

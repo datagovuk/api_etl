@@ -16,7 +16,7 @@
     },
     {
       "type": "string",
-      "name": "organisation_name"
+      "name": "name"
     },
     {
       "type": "string",
@@ -99,13 +99,13 @@
       ]
     },
     {
-      "query": "select * from clinics where LOWER(organisation_name) LIKE '%' || LOWER($1) || '%';",
+      "query": "select * from clinics where LOWER(name) LIKE '%' || LOWER($1) || '%';",
       "description": "Find clinics by name",
-      "name": "organisation_name",
+      "name": "name",
       "fields": [
         {
           "type": "string",
-          "name": "organisation_name",
+          "name": "name",
           "default": "eye clinic"
         }
       ]

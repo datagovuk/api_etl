@@ -32,7 +32,7 @@
     },
     {
       "type": "string",
-      "name": "organisation_name"
+      "name": "name"
     },
     {
       "type": "string",
@@ -111,13 +111,13 @@
       ]
     },
     {
-      "query": "select * from social_care_locations where LOWER(organisation_name) LIKE '%' || LOWER($1) || '%'",
+      "query": "select * from social_care_locations where LOWER(name) LIKE '%' || LOWER($1) || '%'",
       "description": "Find locations by name",
-      "name": "organisation_name",
+      "name": "name",
       "fields": [
         {
           "type": "string",
-          "name": "organisation_name",
+          "name": "name",
           "default": "Carewatch"
         }
       ]

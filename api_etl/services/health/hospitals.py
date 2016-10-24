@@ -54,6 +54,9 @@ class HospitalTransformer(lib.Transformer):
 
         # Copy the existing data ...
         for k, v in row_in.iteritems():
+            if k == 'organisation_name':
+                k = 'name'
+
             if k is None:
                 print "*" * 30
                 print "BAD DATA in source: {}".format(row_in)
@@ -82,7 +85,10 @@ class HospitalTransformer(lib.Transformer):
     def new_header_rows(self, headers):
         """ When implemented in a subclass, returns the potentially modified header rows """
         for header in headers:
-            self.header_map[header] = slugify_name(header)
+            if header == 'OrganisationName':
+                self.header_map[header] = 'name'
+            else:
+                self.header_map[header] = slugify_name(header)
 
         self.header_map['partial_postcode'] = 'partial_postcode'
 

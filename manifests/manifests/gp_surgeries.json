@@ -32,7 +32,7 @@
     },
     {
       "type": "string",
-      "name": "organisation_name"
+      "name": "name"
     },
     {
       "type": "string",
@@ -111,13 +111,13 @@
       ]
     },
     {
-      "query": "select * from gp_surgeries where LOWER(organisation_name) LIKE '%' || LOWER($1) || '%'",
+      "query": "select * from gp_surgeries where LOWER(name) LIKE '%' || LOWER($1) || '%'",
       "description": "Find surgeries by name",
-      "name": "organisation_name",
+      "name": "name",
       "fields": [
         {
           "type": "string",
-          "name": "organisation_name",
+          "name": "name",
           "default": "Thornfield"
         }
       ]

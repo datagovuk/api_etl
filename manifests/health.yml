@@ -12,8 +12,8 @@ services:
       resource: e0f24144-fdfd-4dff-b940-69c737cbc7b4
       table_settings:
         pk_name: organisation_id
-        index: partial_postcode, organisation_name
-        unique_fields: organisation_name, postcode
+        index: partial_postcode, name
+        unique_fields: name, postcode
         filter_fields:
           - county
           - city
@@ -30,11 +30,11 @@ services:
           fields:
             - name: partial_postcode
               type: string
-        - name: organisation_name
+        - name: name
           description: Find hospitals by name
-          query: select * from hospitals where LOWER(organisation_name) ILIKE '%' || LOWER($1) || '%'
+          query: select * from hospitals where LOWER(name) ILIKE '%' || LOWER($1) || '%'
           fields:
-            - name: organisation_name
+            - name: name
               type: string
     - name: clinics
       documentation_url: ""
@@ -46,8 +46,8 @@ services:
       resource: 721b0e82-6aac-4d47-98dd-3d5cbd450ad5
       table_settings:
         pk_name: organisation_id
-        index: partial_postcode, organisation_name
-        unique_fields: organisation_name, postcode
+        index: partial_postcode, name
+        unique_fields: name, postcode
         filter_fields:
           - county
           - city
@@ -61,11 +61,11 @@ services:
           fields:
             - name: partial_postcode
               type: string
-        - name: organisation_name
+        - name: name
           description: Find clinics by name
-          query: select * from clinics where LOWER(organisation_name) LIKE '%' || LOWER($1) || '%';
+          query: select * from clinics where LOWER(name) LIKE '%' || LOWER($1) || '%';
           fields:
-            - name: organisation_name
+            - name: name
               type: string
     - name: gp_surgeries
       documentation_url: ""
@@ -77,8 +77,8 @@ services:
       resource: 9fa08f45-5c17-4e06-9dd7-1b925a09917a
       table_settings:
         pk_name: organisation_id
-        index: partial_postcode, organisation_name
-        unique_fields: organisation_name, postcode
+        index: partial_postcode, name
+        unique_fields: name, postcode
         filter_fields:
           - county
           - city
@@ -92,11 +92,11 @@ services:
           fields:
             - name: partial
               type: string
-        - name: organisation_name
+        - name: name
           description: Find surgeries by name
-          query: select * from gp_surgeries where LOWER(organisation_name) LIKE '%' || LOWER($1) || '%'
+          query: select * from gp_surgeries where LOWER(name) LIKE '%' || LOWER($1) || '%'
           fields:
-            - name: organisation_name
+            - name: name
               type: string
     - name: social_care_locations
       documentation_url: ""
@@ -108,8 +108,8 @@ services:
       resource: dedbab26-15d6-471a-b50e-4e4e88a470da
       table_settings:
         pk_name: organisation_id
-        index: partial_postcode, organisation_name
-        unique_fields: organisation_name, postcode
+        index: partial_postcode, name
+        unique_fields: name, postcode
         filter_fields:
           - county
           - city
@@ -123,11 +123,11 @@ services:
           fields:
             - name: partial_postcode
               type: string
-        - name: organisation_name
+        - name: name
           description: Find locations by name
-          query: select * from social_care_locations where LOWER(organisation_name) LIKE '%' || LOWER($1) || '%'
+          query: select * from social_care_locations where LOWER(name) LIKE '%' || LOWER($1) || '%'
           fields:
-            - name: organisation_name
+            - name: name
               type: string
     - name: pharmacies
       description: "Information about pharmacies"
@@ -139,7 +139,7 @@ services:
       resource: 867f8b0c-fb58-492c-9adb-a37b1abc4fc2
       table_settings:
         pk_name: organisation_code
-        index: partial_postcode, organisation_name
+        index: partial_postcode, name
         unique_fields: organisation_code
         filter_fields:
           - county
@@ -156,9 +156,9 @@ services:
               type: string
         - name: name
           description: Find pharmacies by name
-          query: select * from pharmacies where LOWER(organisation_name) ILIKE '%' || LOWER($1) || '%'
+          query: select * from pharmacies where LOWER(name) ILIKE '%' || LOWER($1) || '%'
           fields:
-            - name: organisation_name
+            - name: name
               type: string
     - name: dental_practices
       description: "Location of General Dental Practices"
