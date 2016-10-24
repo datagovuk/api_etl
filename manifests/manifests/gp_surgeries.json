@@ -107,7 +107,7 @@
       "fields": [
         {
           "type": "string",
-          "name": "partial",
+          "name": "partial_postcode",
           "default": "M1"
         }
       ]
