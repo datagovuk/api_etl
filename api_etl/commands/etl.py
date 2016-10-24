@@ -61,6 +61,9 @@ class ServiceCommand(cmd.Cmd):
             services = [svcs.named_subservice(*parts)]
             service_entries = [manifest.get_service(parts[1])]
 
+        # The ordering of entries in the manifest and entrypoints is
+        # important, they must match otherwise this zip call will
+        # pair up the wrong things.
         entry = zip(services, service_entries)
         for e in entry:
             ep, sm = e
@@ -71,6 +74,7 @@ class ServiceCommand(cmd.Cmd):
 
     def run_etl(self, theme, entry_points, service_manifest):
         """ Runs ETL by finding the manifest for each service based on the name"""
+        print ""
         self.print_separator('=')
         print "Running ETL with {} service".format(service_manifest.name)
         self.print_separator('=')

@@ -39,6 +39,8 @@ class Transformer(object):
                 writer = csv.DictWriter(output_file, fieldnames=headers)
                 writer.writeheader()
 
+                row_pos = 0
+
                 try:
                     for row in reader:
                         # Progress bar
@@ -47,7 +49,6 @@ class Transformer(object):
                         )
                         sys.stdout.flush()
 
-                        this_row = row
                         new_row = self.transform_row(row)
 
                         if new_row:
@@ -56,12 +57,10 @@ class Transformer(object):
                         # this_row records the current row, so if there is an
                         # exception during the "for" step, we know it wasn't
                         # the row before that caused it (the value of row)
-                        this_row = None
-                except Exception:
-                    row_repr = repr(this_row) if this_row != None \
-                        else 'PREVIOUS ONE: ' + repr(row)
-                    print 'Exception occurred processing data row %s: %s' % \
-                        (row_count + 1, row_repr)
+                        row_pos += 1
+                except Exception, e:
+                    print 'Exception occurred processing data row %s in %s' % \
+                        (row_pos + 1, input_filename)
 
         return row_count
 

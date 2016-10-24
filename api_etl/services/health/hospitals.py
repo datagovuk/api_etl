@@ -88,6 +88,7 @@ class HospitalTransformer(lib.Transformer):
 
         return self.header_map.values()
 
+
 class DentistTransformer(lib.Transformer):
 
     def __init__(self):
@@ -106,14 +107,13 @@ class DentistTransformer(lib.Transformer):
                 print "*" * 30
                 return None
             else:
-                key = self.header_map.get(k, '')
+                key = self.header_map.get(k)
                 if key:
                     row[key] = v
-
         # TODO: Trim lat/lng down to more realistic resolution
 
         # Take a partial postcode so we can search for it ...
-        if row['postcode']:
+        if row.get('postcode'):
             row['partial_postcode'] = row['postcode'].split(' ')[0].strip()
         else:
             row['postcode'] = ''

@@ -39,7 +39,7 @@ def entrypoints():
     {
         'name': 'dental_practices',
         'extractor': e.CKANExtractor,
-        'transformer': h.DentistTransformer, # Use same transformer as hospitals
+        'transformer': h.DentistTransformer,
         'loader': l.PostgresLoader,
     }]
 

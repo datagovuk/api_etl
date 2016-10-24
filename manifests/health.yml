@@ -129,31 +129,6 @@ services:
           fields:
             - name: organisation_name
               type: string
-    - name: dental_practices
-      description: "Location of General Dental Practices"
-      documentation_url: ""
-      schema_url: https://raw.githubusercontent.com/datagovuk/health-schemas/master/egdpprac.json
-      separator: comma
-      dataset: general-dental-practices
-      resource: d1d9c708-2cbe-4912-bb3f-8e1014884e2a
-      encoding: windows-1252
-      table_settings:
-        pk_name: organisation_code
-        index: partial_postcode, name
-        unique_fields: organisation_code
-      searchables:
-        - name: partial_postcode
-          description: Find dental practices using just a partial postcode (e.g. CH64, or L1)
-          query: select * from dental_practices where LOWER(partial_postcode) = LOWER($1)
-          fields:
-            - name: partial_postcode
-              type: string
-        - name: name
-          description: Find hospitals by name
-          query: select * from dental_practices where LOWER(name) ILIKE '%' || LOWER($1) || '%'
-          fields:
-            - name: name
-              type: string
     - name: pharmacies
       description: "Information about pharmacies"
       documentation_url: ""
@@ -185,7 +160,31 @@ services:
           fields:
             - name: organisation_name
               type: string
-
+    - name: dental_practices
+      description: "Location of General Dental Practices"
+      documentation_url: ""
+      schema_url: https://raw.githubusercontent.com/datagovuk/health-schemas/master/egdpprac.json
+      separator: comma
+      dataset: general-dental-practices
+      resource: d1d9c708-2cbe-4912-bb3f-8e1014884e2a
+      encoding: windows-1252
+      table_settings:
+        pk_name: organisation_code
+        index: partial_postcode, name
+        unique_fields: organisation_code
+      searchables:
+        - name: partial_postcode
+          description: Find dental practices using just a partial postcode (e.g. CH64, or L1)
+          query: select * from dental_practices where LOWER(partial_postcode) = LOWER($1)
+          fields:
+            - name: partial_postcode
+              type: string
+        - name: name
+          description: Find hospitals by name
+          query: select * from dental_practices where LOWER(name) ILIKE '%' || LOWER($1) || '%'
+          fields:
+            - name: name
+              type: string
 
 
 
