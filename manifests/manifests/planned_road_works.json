@@ -1,6 +1,7 @@
 {
   "title": "Information on planned roadworks carried out on the Highways Agency network",
   "dataset": "https://data.gov.uk/dataset/highways_agency_planned_roadworks",
+  "indexes": ["road"],
   "fields": [
     {
       "type": "string",

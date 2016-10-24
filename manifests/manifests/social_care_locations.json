@@ -2,6 +2,7 @@
   "title": "Social Care service locations",
   "dataset": "https://data.gov.uk/dataset/social-care-locations",
   "geo": true,
+  "indexes": ["partial_postcode", "name"],
   "fields": [
     {
       "type": "string",

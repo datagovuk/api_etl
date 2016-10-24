@@ -1,6 +1,7 @@
 {
   "title": "National Public Transport Access Nodes (NaPTAN) - Airports",
   "dataset": "https://data.gov.uk/dataset/naptan",
+  "indexes": [],
   "fields": [
     {
       "type": "string",

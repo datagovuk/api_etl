@@ -1,7 +1,8 @@
 {
   "title": "National Public Transport Access Nodes (NaPTAN) - Railway Stations",
   "dataset": "https://data.gov.uk/dataset/naptan",
-   "geo": true,
+  "geo": true,
+  "indexes": [],
   "fields": [
     {
       "type": "string",

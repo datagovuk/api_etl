@@ -3,6 +3,7 @@
   "dataset": "https://data.gov.uk/dataset/pharmacies",
   "geo": true,
   "fields": [],
+  "indexes": ["partial_postcode", "name"],
   "tablename": "pharmacies",
   "theme": "health",
   "queries": [

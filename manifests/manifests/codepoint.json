@@ -1,29 +1,30 @@
 {
-  "title": "Codepoint Postcode data", 
+  "title": "Codepoint Postcode data",
+  "indexes": "postcode",
   "fields": [
     {
-      "type": "string", 
+      "type": "string",
       "name": "postcode"
-    }, 
+    },
     {
-      "type": "USER-DEFINED", 
+      "type": "USER-DEFINED",
       "name": "ospoint"
-    }, 
+    },
     {
-      "type": "USER-DEFINED", 
+      "type": "USER-DEFINED",
       "name": "latlong"
-    }, 
+    },
     {
-      "type": "string", 
+      "type": "string",
       "name": "district"
-    }, 
+    },
     {
-      "type": "string", 
+      "type": "string",
       "name": "ward"
     }
-  ], 
-  "tablename": "codepoint", 
-  "theme": "internal", 
-  "id": "codepoint", 
+  ],
+  "tablename": "codepoint",
+  "theme": "internal",
+  "id": "codepoint",
   "choice_fields": []
 }

@@ -1,6 +1,7 @@
 {
   "title": "GP Surgeries",
   "dataset": "https://data.gov.uk/dataset/gp-practices-and-surgeries",
+  "indexes": ["partial_postcode", "name"],
   "geo": true,
   "fields": [
     {
