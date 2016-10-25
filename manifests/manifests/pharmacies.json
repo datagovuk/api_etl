@@ -1,8 +1,99 @@
 {
   "title": "Information about pharmacies",
   "dataset": "https://data.gov.uk/dataset/pharmacies",
-  "geo": true,
-  "fields": [],
+  "fields": [
+   {
+      "type": "string",
+      "name": "city"
+    },
+    {
+      "type": "string",
+      "name": "parent_name"
+    },
+    {
+      "type": "string",
+      "name": "latitude"
+    },
+    {
+      "type": "string",
+      "name": "organisation_id"
+    },
+    {
+      "type": "string",
+      "name": "email"
+    },
+    {
+      "type": "string",
+      "name": "website"
+    },
+    {
+      "type": "string",
+      "name": "fax"
+    },
+    {
+      "type": "string",
+      "name": "name"
+    },
+    {
+      "type": "string",
+      "name": "organisation_code"
+    },
+    {
+      "type": "string",
+      "name": "organisation_type"
+    },
+    {
+      "type": "string",
+      "name": "sub_type"
+    },
+    {
+      "type": "string",
+      "name": "address1"
+    },
+    {
+      "type": "string",
+      "name": "address2"
+    },
+    {
+      "type": "string",
+      "name": "address3"
+    },
+    {
+      "type": "string",
+      "name": "local_authority"
+    },
+    {
+      "type": "string",
+      "name": "phone"
+    },
+    {
+      "type": "string",
+      "name": "organisation_status"
+    },
+    {
+      "type": "string",
+      "name": "postcode"
+    },
+    {
+      "type": "string",
+      "name": "longitude"
+    },
+    {
+      "type": "string",
+      "name": "county"
+    },
+    {
+      "type": "string",
+      "name": "parent_o_d_s_code"
+    },
+    {
+      "type": "string",
+      "name": "is_pims_managed"
+    },
+    {
+      "type": "string",
+      "name": "partial_postcode"
+    }],
   "indexes": ["partial_postcode", "name"],
   "tablename": "pharmacies",
   "theme": "health",

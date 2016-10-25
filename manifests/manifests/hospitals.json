@@ -2,7 +2,6 @@
   "title": "Location of NHS Hospitals",
   "dataset": "https://data.gov.uk/dataset/hospitals_",
   "indexes": ["partial_postcode", "name"],
-  "geo": true,
   "fields": [
     {
       "type": "string",

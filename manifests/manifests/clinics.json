@@ -2,7 +2,6 @@
   "title": "Location of NHS Clinics",
   "dataset": "https://data.gov.uk/dataset/clinics",
   "indexes": ["partial_postcode", "name"],
-  "geo": true,
   "fields": [
     {
       "type": "string",
